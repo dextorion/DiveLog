@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" id="1" x="496" y="48" measuredWidth="608" measuredHeight="1079">
+    <screen xsi:type="model:WidgetGroup" href="Android4/Android4.screen#Phone"/>
+    <overrides>
+      <widgets ref="17" width="608" height="1079"/>
+      <widgets ref="27" x="53" y="141" width="509" height="818"/>
+      <widgets ref="47" x="52" y="140" width="509" height="35"/>
+      <widgets ref="48" width="509" height="30"/>
+      <widgets ref="49" x="367" y="5" width="22" height="20"/>
+      <widgets ref="50" x="397" y="5" width="22" height="20"/>
+      <widgets ref="51" x="426" y="5" width="22" height="20"/>
+      <widgets ref="52" x="445" y="3" width="63"/>
+      <widgets ref="29" x="52" y="901" width="509" height="58"/>
+      <widgets ref="30" width="509" height="58"/>
+      <widgets ref="31" x="84" y="5" width="56" height="50"/>
+      <widgets ref="32" width="56" height="50"/>
+      <widgets ref="33" x="226" y="5" width="56" height="50"/>
+      <widgets ref="34" width="56" height="50"/>
+      <widgets ref="35" x="369" y="5" width="56" height="50"/>
+      <widgets ref="36" width="56" height="50"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Button" id="2" x="691" y="509" width="225" height="105" text="Log" measuredWidth="225" measuredHeight="105" link="Logs.screen">
+    <font size="48px" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="3" x="690" y="332" width="225" height="105" text="Sites" measuredWidth="225" measuredHeight="105" link="Sites.screen">
+    <font size="48px" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Button" id="4" x="692" y="685" width="225" height="105" text="Exit" measuredWidth="225" measuredHeight="105">
+    <font size="48px" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:ButtonBar" id="5" x="549" y="880" width="508" height="70" text="Settings" measuredWidth="508" measuredHeight="70" selection="0">
+    <font size="40px"/>
+    <items x="0" y="0" width="507" height="70" text="Settings"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
