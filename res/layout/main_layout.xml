@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/main_sites"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="55dp"
+        android:layout_marginTop="240dp"
+        android:text="@string/main_sites_button_label"
+        android:gravity="center"
+        android:onClick="startDivesiteListActivity"/>
+
+    <Button
+        android:id="@+id/main_log"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginLeft="55dp"
+        android:layout_marginRight="55dp"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:text="@string/main_log_button_label" 
+        android:onClick="startLogentryListActivity"/>
+
+	<Button
+	    android:id="@+id/main_exit"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="55dp"
+	    android:layout_marginRight="55dp"
+	    android:layout_marginTop="45dp"
+	    android:gravity="center"
+	    android:text="@string/main_exit_button_label"
+	    android:onClick="exit" />
+    
+</LinearLayout>
