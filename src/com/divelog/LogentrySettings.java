@@ -16,6 +16,7 @@ public class LogentrySettings extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
         //setContentView(R.layout.edit_divesite_layout);
         //dataSource = new DataSource(this);
         //dataSource.open();

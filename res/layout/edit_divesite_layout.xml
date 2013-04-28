@@ -19,8 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:width="200sp" >
-        
+        android:width="200sp" > 
         <requestFocus />
     </EditText>
     
@@ -45,8 +44,6 @@
         android:height="80sp"
         android:inputType="textMultiLine"
         android:width="200sp" >
-
-        <requestFocus />
     </EditText>
 
     <LinearLayout 

@@ -3,53 +3,70 @@ package com.divelog;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.divelog.model.Logentry;
+import com.divelog.db.DataSource;
+import com.divelog.model.Divesite;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.text.format.Time;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class DivesiteListActivity extends Activity {
 
+	DataSource dataSource;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.divesite_list_activity_layout);
+        dataSource = new DataSource(this);
+        dataSource.open();
         
-        ListView logEntryListView = (ListView) findViewById(R.id.divesite_list);
+        ListView divesiteListView = (ListView) findViewById(R.id.divesite_list);
         
-        //=====[HEADER ITEM]===============================================================
+        
+        //=====[LIST HEADER]=====//
         LayoutInflater inflater = LayoutInflater.from(this);
         
         View headerView = inflater.inflate(R.layout.divesite_listitem_layout, null); 
         ((TextView)headerView.findViewById(R.id.divesite_listitem_id)).setText("#");
-        ((TextView)headerView.findViewById(R.id.divesite_listitem_date)).setText("Date");
-        ((TextView)headerView.findViewById(R.id.divesite_listitem_dive_site)).setText("Dive site");
+        ((TextView)headerView.findViewById(R.id.divesite_listitem_name)).setText("Name");
         
-        logEntryListView.addHeaderView(headerView, null, true);
-        logEntryListView.setHeaderDividersEnabled(true);
-        //=================================================================================
+        divesiteListView.addHeaderView(headerView, null, true);
+        divesiteListView.setHeaderDividersEnabled(true);
+        //-----------------------//
         
-        //=====[TEST DATA]=================================================================
-        List<Logentry> logEntryList = new ArrayList<Logentry>();
-        logEntryList.add(new Logentry(1, new Time(), "Båtmans brygga"));
-        logEntryList.add(new Logentry(2, new Time(), "Svartfots Vraket"));
-        logEntryList.add(new Logentry(3, new Time(), "Falken"));
+        //=====[TEST DATA]=======//
+        List<Divesite> divesiteList = new ArrayList<Divesite>();
+        divesiteList.add(new Divesite(1, "Båtmans brygga", ""));
+        divesiteList.add(new Divesite(1, "M/S Harm", ""));
+        //-----------------------//
         
-        LogentryAdapter logEntryAdapter = new LogentryAdapter(this, logEntryList);
-        //=================================================================================
+        //====[LIST DATA]========//
+        divesiteList.addAll(dataSource.getAllDivesites());
         
-        logEntryListView.setAdapter(logEntryAdapter);
+        DivesiteAdapter divesiteAdapter = new DivesiteAdapter(this, divesiteList);
+        divesiteListView.setAdapter(divesiteAdapter);
+        //-----------------------//
         
     }
 
+    public void editDivesite(View view) {
+    	ViewGroup parent = (ViewGroup)view.getParent();
+    	boolean viewIsHeader = ((TextView)parent.findViewById(R.id.divesite_listitem_id)).getText().equals("#");
+    	if(!viewIsHeader) {
+    		startActivity(new Intent(this, EditDivesiteActivity.class));
+    	}
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.divesite_list_menu, menu);

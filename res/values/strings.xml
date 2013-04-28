@@ -2,6 +2,10 @@
 
     <string name="app_name">DiveLog</string>
     
+    <string name="main_sites_button_label">Sites</string>
+    <string name="main_log_button_label">Log</string>
+    <string name="main_exit_button_label">Exit</string>
+    
     <string name="logentry_list_add_entry_title">Log Dive</string>
     <string name="logentry_list_settings_title">Dive Settings</string>
     
@@ -14,5 +18,6 @@
     <string name="edit_divesite_description_label">Description: </string>
     <string name="edit_divesite_save_button_label">Save</string>
     <string name="edit_divesite_cancel_button_label">Cancel</string>
+    
 
 </resources>

@@ -3,6 +3,7 @@ package com.divelog;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.divelog.db.DataSource;
 import com.divelog.model.Logentry;
 
 import android.os.Bundle;
@@ -18,12 +19,14 @@ import android.widget.TextView;
 
 public class LogentryListActivity extends Activity {
 
+	DataSource dataSource;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logentry_list_activity_layout);
         
-        ListView logEntryListView = (ListView) findViewById(R.id.logentry_list);
+        ListView logentryListView = (ListView) findViewById(R.id.logentry_list);
         
         //=====[HEADER ITEM]===============================================================
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -33,8 +36,8 @@ public class LogentryListActivity extends Activity {
         ((TextView)headerView.findViewById(R.id.logentry_listitem_date)).setText("Date");
         ((TextView)headerView.findViewById(R.id.logentry_listitem_dive_site)).setText("Dive site");
         
-        logEntryListView.addHeaderView(headerView, null, true);
-        logEntryListView.setHeaderDividersEnabled(true);
+        logentryListView.addHeaderView(headerView, null, true);
+        logentryListView.setHeaderDividersEnabled(true);
         //=================================================================================
         
         //=====[TEST DATA]=================================================================
@@ -46,7 +49,7 @@ public class LogentryListActivity extends Activity {
         LogentryAdapter logEntryAdapter = new LogentryAdapter(this, logEntryList);
         //=================================================================================
         
-        logEntryListView.setAdapter(logEntryAdapter);
+        logentryListView.setAdapter(logEntryAdapter);
         
     }
 
