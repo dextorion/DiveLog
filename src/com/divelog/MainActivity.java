@@ -1,5 +1,8 @@
 package com.divelog;
 
+import com.divelog.activity.divesite.DivesiteListActivity;
+import com.divelog.activity.logentry.LogentryListActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

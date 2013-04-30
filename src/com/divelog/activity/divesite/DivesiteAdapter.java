@@ -1,8 +1,11 @@
-package com.divelog;
+package com.divelog.activity.divesite;
 
 import java.util.List;
 
-import com.divelog.model.Divesite;
+import com.divelog.R;
+import com.divelog.R.id;
+import com.divelog.R.layout;
+import com.divelog.db.model.Divesite;
 
 import android.content.Context;
 import android.view.LayoutInflater;

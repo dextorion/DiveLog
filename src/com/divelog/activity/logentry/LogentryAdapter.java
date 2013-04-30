@@ -1,8 +1,11 @@
-package com.divelog;
+package com.divelog.activity.logentry;
 
 import java.util.List;
 
-import com.divelog.model.Logentry;
+import com.divelog.R;
+import com.divelog.R.id;
+import com.divelog.R.layout;
+import com.divelog.db.model.Logentry;
 
 import android.content.Context;
 import android.view.LayoutInflater;

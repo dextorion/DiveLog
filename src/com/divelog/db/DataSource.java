@@ -3,7 +3,7 @@ package com.divelog.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.divelog.model.Divesite;
+import com.divelog.db.model.Divesite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -35,6 +35,14 @@ public class DataSource {
 		long id = database.insert(DataSourceHelper.TABLE_DIVESITES, null, values);
 		
 		return new Divesite(id, name, description);
+	}
+	
+	public Divesite getDivesite(int id) {
+		Cursor cursor = database.query(DataSourceHelper.TABLE_DIVESITES, null, "id = " + id, null, null, null, null);
+		cursor.moveToFirst();
+		Divesite divesite = new Divesite(cursor.getLong(0), cursor.getString(1), cursor.getString(2));
+		
+		return divesite;
 	}
 	
 	public List<Divesite> getAllDivesites() {

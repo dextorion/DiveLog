@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/view_divesite_name_label"
+        android:text="@string/edit_divesite_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/view_divesite_name"
+        android:layout_alignBottom="@+id/view_divesite_name"
+        android:layout_alignParentLeft="true" />
+        
+    <TextView
+        android:id="@+id/view_divesite_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:width="200sp" /> 
+    
+    <TextView
+        android:id="@+id/view_divesite_description_label"
+        android:text="@string/edit_divesite_description_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/view_divesite_description"
+        android:layout_alignBottom="@+id/view_divesite_description"
+        android:layout_alignParentLeft="true" />
+        
+    <TextView
+        android:id="@+id/view_divesite_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@id/edit_divesite_name_label"
+        android:gravity="top"
+        android:height="80sp"
+        android:width="200sp" />
+    
+</RelativeLayout>

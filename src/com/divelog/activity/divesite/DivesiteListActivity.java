@@ -1,21 +1,20 @@
-package com.divelog;
+package com.divelog.activity.divesite;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.divelog.R;
 import com.divelog.db.DataSource;
-import com.divelog.model.Divesite;
+import com.divelog.db.model.Divesite;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -59,11 +58,19 @@ public class DivesiteListActivity extends Activity {
         
     }
 
-    public void editDivesite(View view) {
+    public void viewDivesite(View view) {
     	ViewGroup parent = (ViewGroup)view.getParent();
-    	boolean viewIsHeader = ((TextView)parent.findViewById(R.id.divesite_listitem_id)).getText().equals("#");
+    	CharSequence id = ((TextView)parent.findViewById(R.id.divesite_listitem_id)).getText();
+    	boolean viewIsHeader = id.equals("#");
+    	
     	if(!viewIsHeader) {
-    		startActivity(new Intent(this, EditDivesiteActivity.class));
+    		Bundle bundle = new Bundle();
+    		bundle.putInt("id", Integer.parseInt(id.toString()));
+    		
+    		Intent viewIntent = new Intent();
+    		viewIntent.putExtras(bundle);
+    		viewIntent.setClass(this,ViewDivesiteActivity.class);
+    		startActivity(viewIntent);
     	}
     }
     
@@ -85,7 +92,7 @@ public class DivesiteListActivity extends Activity {
             	return true;
             	
             default:
-            return super.onOptionsItemSelected(item);
+            	return super.onOptionsItemSelected(item);
         }
     }
 }

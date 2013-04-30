@@ -1,4 +1,4 @@
-package com.divelog.model;
+package com.divelog.db.model;
 
 import android.text.format.Time;
 

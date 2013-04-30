@@ -1,10 +1,14 @@
-package com.divelog;
+package com.divelog.activity.logentry;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.divelog.R;
+import com.divelog.R.id;
+import com.divelog.R.layout;
+import com.divelog.R.menu;
 import com.divelog.db.DataSource;
-import com.divelog.model.Logentry;
+import com.divelog.db.model.Logentry;
 
 import android.os.Bundle;
 import android.app.Activity;
