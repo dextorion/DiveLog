@@ -15,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 
 public class DivesiteListActivity extends Activity {
 
@@ -27,11 +29,9 @@ public class DivesiteListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.divesite_list_activity_layout);
         dataSource = new DataSource(this);
-        dataSource.open();
         
         ListView divesiteListView = (ListView) findViewById(R.id.divesite_list);
-        
-        
+         
         //=====[LIST HEADER]=====//
         LayoutInflater inflater = LayoutInflater.from(this);
         
@@ -43,19 +43,30 @@ public class DivesiteListActivity extends Activity {
         divesiteListView.setHeaderDividersEnabled(true);
         //-----------------------//
         
-        //=====[TEST DATA]=======//
-        List<Divesite> divesiteList = new ArrayList<Divesite>();
-        divesiteList.add(new Divesite(1, "Båtmans brygga", ""));
-        divesiteList.add(new Divesite(1, "M/S Harm", ""));
+        //==[LIST DATA ADAPTER]==//
+    	List<Divesite> divesiteList = new ArrayList<Divesite>();
+    	DivesiteAdapter divesiteAdapter = new DivesiteAdapter(this, divesiteList);
+    	divesiteListView.setAdapter(divesiteAdapter);
+    	//----------------------//
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	dataSource.open();
+    	
+    	ListView divesiteListView = (ListView) findViewById(R.id.divesite_list);
+
+    	//====[LIST DATA]========//
+    	DivesiteAdapter divesiteAdapter = (DivesiteAdapter)((HeaderViewListAdapter)divesiteListView.getAdapter()).getWrappedAdapter();
+    	
+    	divesiteAdapter.getDivesiteList().clear();
+    	divesiteAdapter.getDivesiteList().addAll(dataSource.getAllDivesites());
+    	divesiteAdapter.notifyDataSetChanged();
         //-----------------------//
-        
-        //====[LIST DATA]========//
-        divesiteList.addAll(dataSource.getAllDivesites());
-        
-        DivesiteAdapter divesiteAdapter = new DivesiteAdapter(this, divesiteList);
-        divesiteListView.setAdapter(divesiteAdapter);
-        //-----------------------//
-        
+    	
+    	dataSource.close();
+    	
     }
 
     public void viewDivesite(View view) {

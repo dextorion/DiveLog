@@ -23,7 +23,7 @@
         <activity android:name="com.divelog.activity.divesite.DivesiteListActivity" />
         <activity android:name="com.divelog.activity.divesite.ViewDivesiteActivity" />
         <activity android:name="com.divelog.activity.divesite.EditDivesiteActivity" />
-        <activity android:name=".LogentryListActivity" />
+        <activity android:name="com.divelog.activity.logentry.LogentryListActivity" />
 
     </application>
 

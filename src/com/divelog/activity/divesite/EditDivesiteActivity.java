@@ -1,10 +1,7 @@
 package com.divelog.activity.divesite;
 
 import com.divelog.R;
-import com.divelog.R.id;
-import com.divelog.R.layout;
 import com.divelog.db.DataSource;
-import com.divelog.db.model.Divesite;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -29,12 +26,14 @@ public class EditDivesiteActivity extends Activity {
 		EditText name = (EditText)findViewById(R.id.edit_divesite_name);
 		EditText description = (EditText)findViewById(R.id.edit_divesite_description);
 		
-		Divesite diveSite = dataSource.createDiveSite(name.getText().toString(), description.getText().toString());
+		dataSource.createDiveSite(name.getText().toString(), description.getText().toString());
 		
-		Toast.makeText(this, diveSite.getDescription(), Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Divesite saved", Toast.LENGTH_SHORT).show();
+		
+		finish();
 	}
 	
 	public void cancelDivesite(View v) {
-		Toast.makeText(this, "Save", Toast.LENGTH_SHORT).show();
+		finish();
 	}
 }

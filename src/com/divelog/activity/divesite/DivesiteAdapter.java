@@ -3,8 +3,6 @@ package com.divelog.activity.divesite;
 import java.util.List;
 
 import com.divelog.R;
-import com.divelog.R.id;
-import com.divelog.R.layout;
 import com.divelog.db.model.Divesite;
 
 import android.content.Context;
@@ -12,9 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
-public class DivesiteAdapter extends BaseAdapter {
+public class DivesiteAdapter extends BaseAdapter implements ListAdapter {
 
 	private Context context;
 	LayoutInflater inflater;
@@ -31,6 +30,10 @@ public class DivesiteAdapter extends BaseAdapter {
 		this.inflater = LayoutInflater.from(this.context);
 		
 		this.divesiteList = divesiteList;
+	}
+	
+	public List<Divesite> getDivesiteList() {
+		return divesiteList;
 	}
 	
 	public int getCount() {

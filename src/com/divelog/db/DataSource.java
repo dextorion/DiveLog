@@ -25,6 +25,7 @@ public class DataSource {
 	}
 
 	public void close() {
+		database.close();
 		dbHelper.close();
 	}
 	
@@ -54,6 +55,8 @@ public class DataSource {
 			divesites.add(new Divesite(cursor.getLong(0), cursor.getString(1), cursor.getString(2)));
 			cursor.moveToNext();
 		}
+		
+		cursor.close();
 		
 		return divesites;
 	}
