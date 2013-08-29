@@ -24,6 +24,8 @@
         <activity android:name="com.divelog.activity.divesite.ViewDivesiteActivity" />
         <activity android:name="com.divelog.activity.divesite.EditDivesiteActivity" />
         <activity android:name="com.divelog.activity.logentry.LogentryListActivity" />
+        <activity android:name="com.divelog.activity.logentry.ViewLogentryActivity" />
+        <activity android:name="com.divelog.activity.logentry.EditLogentryActivity" />
 
     </application>
 

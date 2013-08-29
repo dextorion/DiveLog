@@ -61,7 +61,7 @@ public class DivesiteAdapter extends BaseAdapter implements ListAdapter {
 		} else {
 			viewHolder = (DivesiteViewHolder) convertView.getTag();
 		}
-		
+
 		viewHolder.id.setText(String.valueOf(this.divesiteList.get(position).getId()));
 		viewHolder.name.setText(this.divesiteList.get(position).getName());
 		

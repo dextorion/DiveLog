@@ -18,6 +18,12 @@
     <string name="edit_divesite_description_label">Description: </string>
     <string name="edit_divesite_save_button_label">Save</string>
     <string name="edit_divesite_cancel_button_label">Cancel</string>
+
+    <string name="edit_logentry_num_label">Nr </string>
+    <string name="edit_logentry_divesite_label">Divesite: </string>
+    <string name="edit_logentry_description_label">Description: </string>
+    <string name="edit_logentry_save_button_label">Save</string>
+    <string name="edit_logentry_cancel_button_label">Cancel</string>
     
 
 </resources>

@@ -3,8 +3,6 @@ package com.divelog.activity.logentry;
 import java.util.List;
 
 import com.divelog.R;
-import com.divelog.R.id;
-import com.divelog.R.layout;
 import com.divelog.db.model.Logentry;
 
 import android.content.Context;
@@ -33,6 +31,10 @@ public class LogentryAdapter extends BaseAdapter {
 		
 		this.logEntryList = logEntryList;
 	}
+
+    public List<Logentry> getLogentryList() {
+        return logEntryList;
+    }
 	
 	public int getCount() {
 		return this.logEntryList.size();
@@ -43,7 +45,7 @@ public class LogentryAdapter extends BaseAdapter {
 	}
 
 	public long getItemId(int position) {
-		return this.logEntryList.get(position).getId();
+		return this.logEntryList.get(position).getNum();
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -61,9 +63,9 @@ public class LogentryAdapter extends BaseAdapter {
 			viewHolder = (LogEntryViewHolder) convertView.getTag();
 		}
 		
-		viewHolder.id.setText(String.valueOf(this.logEntryList.get(position).getId()));
+		viewHolder.id.setText(String.valueOf(this.logEntryList.get(position).getNum()));
 		viewHolder.date.setText(this.logEntryList.get(position).getDate().format("%G-%m-%d"));
-		viewHolder.diveSite.setText(this.logEntryList.get(position).getDiveSite());
+		viewHolder.diveSite.setText(this.logEntryList.get(position).getDiveSite().getName());
 		
 		return convertView;
 	}

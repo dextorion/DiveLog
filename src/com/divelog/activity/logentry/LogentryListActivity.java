@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.divelog.R;
-import com.divelog.R.id;
-import com.divelog.R.layout;
-import com.divelog.R.menu;
+import com.divelog.activity.divesite.ViewDivesiteActivity;
 import com.divelog.db.DataSource;
+import com.divelog.db.model.Divesite;
 import com.divelog.db.model.Logentry;
 
 import android.os.Bundle;
@@ -18,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,7 +30,8 @@ public class LogentryListActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logentry_list_activity_layout);
-        
+        dataSource = new DataSource(this);
+
         ListView logentryListView = (ListView) findViewById(R.id.logentry_list);
         
         //=====[HEADER ITEM]===============================================================
@@ -43,18 +45,46 @@ public class LogentryListActivity extends Activity {
         logentryListView.addHeaderView(headerView, null, true);
         logentryListView.setHeaderDividersEnabled(true);
         //=================================================================================
-        
-        //=====[TEST DATA]=================================================================
+
+
         List<Logentry> logEntryList = new ArrayList<Logentry>();
-        logEntryList.add(new Logentry(1, new Time(), "Båtmans brygga"));
-        logEntryList.add(new Logentry(2, new Time(), "Svartfots Vraket"));
-        logEntryList.add(new Logentry(3, new Time(), "Falken"));
-        
         LogentryAdapter logEntryAdapter = new LogentryAdapter(this, logEntryList);
-        //=================================================================================
-        
         logentryListView.setAdapter(logEntryAdapter);
         
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dataSource.open();
+
+        ListView logentryListView = (ListView) findViewById(R.id.logentry_list);
+
+        //====[LIST DATA]========//Logentry
+        LogentryAdapter logentryAdapter = (LogentryAdapter)((HeaderViewListAdapter)logentryListView.getAdapter()).getWrappedAdapter();
+
+        logentryAdapter.getLogentryList().clear();
+        logentryAdapter.getLogentryList().addAll(dataSource.getAllLogentries());
+        logentryAdapter.notifyDataSetChanged();
+        //-----------------------//
+
+        dataSource.close();
+    }
+
+    public void viewDivesite(View view) {
+        ViewGroup parent = (ViewGroup)view.getParent();
+        CharSequence id = ((TextView)parent.findViewById(R.id.logentry_listitem_id)).getText();
+        boolean viewIsHeader = id.equals("#");
+
+        if(!viewIsHeader) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("id", Integer.parseInt(id.toString()));
+
+            Intent viewIntent = new Intent();
+            viewIntent.putExtras(bundle);
+            viewIntent.setClass(this,ViewDivesiteActivity.class);
+            startActivity(viewIntent);
+        }
     }
 
     @Override
@@ -67,12 +97,12 @@ public class LogentryListActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch(item.getItemId()) {
             case R.id.logentry_list_add_entry:
-                //TODO: GOTO Add Entry Activity
+                startActivity(new Intent(this, EditLogentryActivity.class));
                 return true;
             
             case R.id.logentry_list_settings:
-            	startActivity(new Intent(this, LogentrySettings.class));
-            	return true;
+            	//startActivity(new Intent(this, LogentrySettings.class));
+            	return false;
             	
             default:
             return super.onOptionsItemSelected(item);

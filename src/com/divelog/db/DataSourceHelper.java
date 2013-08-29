@@ -12,9 +12,19 @@ public class DataSourceHelper extends SQLiteOpenHelper {
 	public static final String TABLE_LOGENTRIES = "logentries";
 	public static final String QUERY_CREATE_TABLE_LOGENTRIES = "create table " + TABLE_LOGENTRIES + " (num integer primary key, date datetime, duration integer, gas_type string, gas_in integer, gas_used integer, depth integer, divesite integer, description text);";
 
+    public static final int LOGENTRIES_NUM_COLUMN = 0;
+    public static final int LOGENTRIES_DATE_COLUMN = 1;
+    public static final int LOGENTRIES_DURATION_COLUMN = 2;
+    public static final int LOGENTRIES_GAS_TYPE_COLUMN = 3;
+    public static final int LOGENTRIES_GAS_IN_COLUMN = 4;
+    public static final int LOGENTRIES_GAS_USED_COLUMN = 5;
+    public static final int LOGENTRIES_DEPTH_COLUMN = 6;
+    public static final int LOGENTRIES_DIVESITE_COLUMN = 7;
+    public static final int LOGENTRIES_DESCRIPTION_COLUMN = 8;
+
 	public static final String TABLE_DIVESITES = "divesites";
 	public static final String QUERY_CREATE_TABLE_DIVESITES = "create table "+ TABLE_DIVESITES + "( id integer primary key autoincrement, name string, description text);";
-	public static final String QUERY_SELECT_ALL_DIVESITES = "select * from divesites;";
+
 	
 	public DataSourceHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

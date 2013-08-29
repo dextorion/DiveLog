@@ -8,42 +8,37 @@
         android:text="@string/edit_divesite_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/edit_divesite_name"
-        android:layout_alignBottom="@+id/edit_divesite_name"
-        android:layout_alignParentLeft="true" />
-        
+        android:layout_alignTop="@id/edit_divesite_name"
+        android:layout_marginTop="13dp"/>
+
     <EditText
         android:id="@+id/edit_divesite_name"
         android:inputType="textPersonName"
-        android:layout_width="wrap_content"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:width="200sp" > 
+        android:width="200sp" >
         <requestFocus />
     </EditText>
-    
+
     <TextView
         android:id="@+id/edit_divesite_description_label"
         android:text="@string/edit_divesite_description_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/edit_divesite_description"
-        android:layout_alignBottom="@+id/edit_divesite_description"
-        android:layout_alignParentLeft="true" />
-        
+        android:layout_alignTop="@id/edit_divesite_description"
+        android:layout_marginTop="13dp"/>
+
     <EditText
         android:id="@+id/edit_divesite_description"
-        android:layout_width="wrap_content"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@id/edit_divesite_name_label"
+        android:layout_below="@id/edit_divesite_name"
         android:gravity="top"
         android:height="80sp"
-        android:inputType="textMultiLine"
-        android:width="200sp" >
+        android:inputType="textMultiLine">
     </EditText>
 
     <LinearLayout 

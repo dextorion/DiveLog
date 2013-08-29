@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/view_logentry_num_label"
+        android:text="@string/edit_logentry_num_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="20sp"
+        android:layout_alignParentLeft="true" />
+        
+    <TextView
+        android:id="@+id/view_logentry_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="60sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/view_logentry_num_label"/>
+
+    <TextView
+            android:id="@+id/view_logentry_divesite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="250sp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/view_logentry_num"/>
+
+    <TextView
+        android:id="@+id/view_logentry_description_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/view_logentry_num_label"
+        android:layout_marginTop="15dp"
+        android:text="@string/edit_logentry_description_label" />
+
+    <TextView
+        android:id="@+id/view_logentry_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_logentry_description_label"
+        android:height="80sp"
+        android:width="200sp" />
+    
+</RelativeLayout>

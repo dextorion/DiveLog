@@ -100,7 +100,7 @@ public class DivesiteListActivity extends Activity {
             
             case R.id.divesite_list_settings:
             	//startActivity(new Intent(this, DivesiteSettingsActivity.class));
-            	return true;
+            	return false;
             	
             default:
             	return super.onOptionsItemSelected(item);
