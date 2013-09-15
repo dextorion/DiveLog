@@ -8,16 +8,15 @@
         android:text="@string/edit_logentry_divesite_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/edit_logentry_divesite"
+        android:layout_alignTop="@+id/edit_logentry_divesite"
         android:layout_marginTop="13dp"/>
 
     <Spinner
-            android:id="@+id/edit_logentry_divesite"
+            android:id="@id/edit_logentry_divesite"
             android:layout_width="400px"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
-
 
     <LinearLayout 
     	android:layout_width="fill_parent" 

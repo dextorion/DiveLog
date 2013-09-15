@@ -3,14 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/edit_divesite_name_label"
-        android:text="@string/edit_divesite_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/edit_divesite_name"
-        android:layout_marginTop="13dp"/>
-
     <EditText
         android:id="@+id/edit_divesite_name"
         android:inputType="textPersonName"
@@ -23,11 +15,11 @@
     </EditText>
 
     <TextView
-        android:id="@+id/edit_divesite_description_label"
-        android:text="@string/edit_divesite_description_label"
+        android:id="@+id/edit_divesite_name_label"
+        android:text="@string/edit_divesite_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/edit_divesite_description"
+        android:layout_alignTop="@id/edit_divesite_name"
         android:layout_marginTop="13dp"/>
 
     <EditText
@@ -41,7 +33,16 @@
         android:inputType="textMultiLine">
     </EditText>
 
-    <LinearLayout 
+    <TextView
+        android:id="@+id/edit_divesite_description_label"
+        android:text="@string/edit_divesite_description_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/edit_divesite_description"
+        android:layout_alignBottom="@id/edit_divesite_description"
+        android:layout_alignParentLeft="true"/>
+
+    <LinearLayout
     	android:layout_width="fill_parent" 
     	android:layout_height="wrap_content"
     	android:weightSum="1.0"

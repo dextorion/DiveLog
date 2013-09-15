@@ -48,18 +48,19 @@ public class DataSource {
 		return divesite;
 	}
 
-    public Logentry createLogentry(Time date, int duration, String gas_type, int gas_used, int depth, Divesite divesite, String description) {
+    public Logentry createLogentry(int num, Time date, int duration, String gas_type, int gas_in, int gas_used, int depth, Divesite divesite, String description) {
         ContentValues values = new ContentValues();
         values.put("date", date.format2445());
         values.put("duration", duration);
         values.put("gas_type", gas_type);
+        values.put("gas_in", gas_in);
         values.put("gas_used", gas_used);
         values.put("depth", depth);
         values.put("divesite", divesite.getId());
         values.put("description", description);
-        long id = database.insert(DataSourceHelper.TABLE_LOGENTRIES, null, values);
+        database.insert(DataSourceHelper.TABLE_LOGENTRIES, null, values);
 
-        return new Logentry(id, date, divesite, description);
+        return new Logentry(num, date, duration, gas_type, gas_in, gas_used, depth, divesite, description);
     }
 
     public Logentry getLogentry(int id) {
@@ -103,7 +104,7 @@ public class DataSource {
     private Logentry extractLogentry(Cursor cursor) {
         Time time = new Time();
 
-        long num = cursor.getLong(DataSourceHelper.LOGENTRIES_NUM_COLUMN);
+        int num = cursor.getInt(DataSourceHelper.LOGENTRIES_NUM_COLUMN);
         time.parse(cursor.getString(DataSourceHelper.LOGENTRIES_DATE_COLUMN));
         int duration = cursor.getInt(DataSourceHelper.LOGENTRIES_DURATION_COLUMN);
         String gas_type = cursor.getString(DataSourceHelper.LOGENTRIES_GAS_TYPE_COLUMN);
@@ -115,6 +116,6 @@ public class DataSource {
 
         Divesite divesite = getDivesite(divesiteId);
 
-        return new Logentry(num, time, divesite, description);
+        return new Logentry(num, time, duration, gas_type, gas_in, gas_used, depth, divesite, description);
     }
 }
