@@ -4,20 +4,158 @@
     android:layout_height="fill_parent" >
 
     <TextView
+        android:id="@+id/edit_logentry_num_label"
+        android:text="@string/edit_logentry_num_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit_logentry_num"
+        android:layout_marginTop="13dp"/>
+    
+    <EditText
+        android:id="@id/edit_logentry_num"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edit_logentry_divesite"
+        android:layout_alignParentTop="true"
+        android:inputType="number">
+    </EditText>
+    
+    <TextView
         android:id="@+id/edit_logentry_divesite_label"
         android:text="@string/edit_logentry_divesite_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/edit_logentry_divesite"
+        android:layout_alignTop="@id/edit_logentry_divesite"
         android:layout_marginTop="13dp"/>
 
     <Spinner
-            android:id="@id/edit_logentry_divesite"
-            android:layout_width="400px"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"/>
+		android:id="@id/edit_logentry_divesite"
+		android:layout_width="260dp"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/edit_logentry_num"/>
 
+    <TextView
+        android:id="@+id/edit_logentry_date_label"
+        android:text="@string/edit_logentry_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit_logentry_date"
+        android:layout_marginTop="13dp"/>
+    
+    <EditText
+        android:id="@+id/edit_logentry_date"
+        android:hint="@string/edit_logentry_date_hint"
+        android:layout_width="199dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/edit_logentry_divesite"
+        android:layout_below="@id/edit_logentry_divesite"
+        android:gravity="top" 
+        android:inputType="date">
+    </EditText>
+    
+    <Button
+        android:id="@+id/edit_logentry_select_date"
+        android:text="@string/edit_Logentry_select_date" 
+        android:onClick="showDatePickerDialog"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/edit_logentry_divesite"
+        android:layout_alignParentRight="true">
+    </Button>
+    
+    
+    
+    <TextView
+        android:id="@+id/edit_logentry_duration_label"
+        android:text="@string/edit_logentry_duration_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit_logentry_duration"
+        android:layout_marginTop="13dp"/>
+    
+    <EditText
+        android:id="@id/edit_logentry_duration"
+        android:hint="@string/edit_logentry_duration_hint"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_logentry_select_date"
+        android:layout_alignLeft="@id/edit_logentry_divesite"
+        android:inputType="number">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/edit_logentry_depth_label"
+        android:text="@string/edit_logentry_depth_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit_logentry_depth"
+        android:layout_toLeftOf="@id/edit_logentry_depth"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="3dp"/>
+    
+    <EditText
+        android:id="@id/edit_logentry_depth"
+        android:hint="@string/edit_logentry_depth_hint"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_logentry_select_date"
+        android:layout_alignParentRight="true"
+        android:inputType="number">
+    </EditText>
+    
+    
+    <TextView
+        android:id="@+id/edit_logentry_gasin_label"
+        android:text="@string/edit_logentry_gasin_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit_logentry_gasin"
+        android:layout_marginTop="13dp"/>
+    
+    <EditText
+        android:id="@id/edit_logentry_gasin"
+        android:hint="@string/edit_logentry_gas_hint"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_logentry_duration"
+        android:layout_alignLeft="@id/edit_logentry_divesite"
+        android:inputType="number">
+    </EditText>
+    
+    <TextView
+        android:id="@+id/edit_logentry_gasout_label"
+        android:text="@string/edit_logentry_gasout_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/edit_logentry_gasout"
+        android:layout_toLeftOf="@id/edit_logentry_gasout"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="3dp"/>
+    
+    <EditText
+        android:id="@id/edit_logentry_gasout"
+        android:hint="@string/edit_logentry_gas_hint"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_logentry_duration"
+        android:layout_alignParentRight="true"
+        android:inputType="number">
+    </EditText>
+    
+    <EditText
+        android:id="@+id/edit_logentry_description"
+        android:hint="@string/edit_logentry_description_hint"
+        android:gravity="top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/edit_logentry_gasout"
+        android:height="180dp"
+        android:inputType="textMultiLine">
+    </EditText>
+    
+    
     <LinearLayout 
     	android:layout_width="fill_parent" 
     	android:layout_height="wrap_content"
@@ -25,18 +163,18 @@
     	android:layout_alignParentBottom="true" >
         
 	    <Button
-	        android:id="@+id/edit_divesite_save"
-	        android:text="@string/edit_divesite_save_button_label" 
-	        android:onClick="saveDivesite"
+	        android:id="@+id/edit_logentry_save"
+	        android:text="@string/edit_logentry_save_button_label" 
+	        android:onClick="saveLogentry"
 	      	android:layout_width="0px"
 	        android:layout_weight="0.5"
 	        android:layout_height="wrap_content"
 	        />
 	
 	    <Button
-	        android:id="@+id/edit_divesite_cancel"
-	        android:text="@string/edit_divesite_cancel_button_label"
-	        android:onClick="cancelDivesite"
+	        android:id="@+id/edit_logentrye_cancel"
+	        android:text="@string/edit_logentry_cancel_button_label"
+	        android:onClick="cancelLogentry"
 	        android:layout_width="0px"
 	        android:layout_weight="0.5"
 	        android:layout_height="wrap_content"

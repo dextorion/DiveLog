@@ -10,17 +10,17 @@ public class DataSourceHelper extends SQLiteOpenHelper {
 	public static final int DATABASE_VERSION = 1;
 
 	public static final String TABLE_LOGENTRIES = "logentries";
-	public static final String QUERY_CREATE_TABLE_LOGENTRIES = "create table " + TABLE_LOGENTRIES + " (num integer primary key, date datetime, duration integer, gas_type string, gas_in integer, gas_used integer, depth integer, divesite integer, description text);";
+	public static final String QUERY_CREATE_TABLE_LOGENTRIES = "create table " + TABLE_LOGENTRIES + " (id integer primary key autoincrement, num integer, date datetime, duration integer, gas_in integer, gas_out integer, depth integer, divesite integer, description text);";
 
-    public static final int LOGENTRIES_NUM_COLUMN = 0;
-    public static final int LOGENTRIES_DATE_COLUMN = 1;
-    public static final int LOGENTRIES_DURATION_COLUMN = 2;
-    public static final int LOGENTRIES_GAS_TYPE_COLUMN = 3;
-    public static final int LOGENTRIES_GAS_IN_COLUMN = 4;
-    public static final int LOGENTRIES_GAS_USED_COLUMN = 5;
-    public static final int LOGENTRIES_DEPTH_COLUMN = 6;
-    public static final int LOGENTRIES_DIVESITE_COLUMN = 7;
-    public static final int LOGENTRIES_DESCRIPTION_COLUMN = 8;
+	public static final int LOGENTRY_ID_COLUMN = 0;
+    public static final int LOGENTRY_NUM_COLUMN = 1;
+    public static final int LOGENTRY_DATE_COLUMN = 2;
+    public static final int LOGENTRY_DURATION_COLUMN = 3;
+    public static final int LOGENTRY_GAS_IN_COLUMN = 4;
+    public static final int LOGENTRY_GAS_OUT_COLUMN = 5;
+    public static final int LOGENTRY_DEPTH_COLUMN = 6;
+    public static final int LOGENTRY_DIVESITE_COLUMN = 7;
+    public static final int LOGENTRY_DESCRIPTION_COLUMN = 8;
 
 	public static final String TABLE_DIVESITES = "divesites";
 	public static final String QUERY_CREATE_TABLE_DIVESITES = "create table "+ TABLE_DIVESITES + "( id integer primary key autoincrement, name string, description text);";
@@ -38,8 +38,18 @@ public class DataSourceHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("drop table if exists " + TABLE_LOGENTRIES);
-		db.execSQL("drop table if exists " + TABLE_DIVESITES);
-		onCreate(db);
+		
+		if(oldVersion < newVersion) {
+			switch(oldVersion) {
+				case 1:
+					//insert update sql from version 1 here
+				
+				default:
+					db.execSQL("drop table if exists " + TABLE_LOGENTRIES);
+					db.execSQL("drop table if exists " + TABLE_DIVESITES);
+					onCreate(db);
+				break;
+			}
+		}
 	}
 }

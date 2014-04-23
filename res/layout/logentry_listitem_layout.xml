@@ -11,10 +11,12 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:textStyle="normal"
         android:gravity="center_vertical"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:clickable="true"
+        android:onClick="viewLogentry"/>
     
     <TextView
         android:id="@+id/logentry_listitem_date"
@@ -22,10 +24,12 @@
         android:layout_height="fill_parent"
 		android:layout_weight="3"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:textStyle="normal"
         android:gravity="center_vertical"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:clickable="true"
+        android:onClick="viewLogentry" />
     
     <TextView
         android:id="@+id/logentry_listitem_dive_site"
@@ -33,9 +37,11 @@
         android:layout_height="fill_parent"
         android:layout_weight="6"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:textStyle="normal"
         android:gravity="center_vertical"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:clickable="true"
+        android:onClick="viewLogentry" />
 
 </LinearLayout>

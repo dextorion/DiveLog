@@ -19,7 +19,6 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 public class DivesiteListActivity extends Activity {
 
 	DataSource dataSource;

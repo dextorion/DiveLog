@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.divelog.R;
-import com.divelog.activity.divesite.ViewDivesiteActivity;
 import com.divelog.db.DataSource;
-import com.divelog.db.model.Divesite;
 import com.divelog.db.model.Logentry;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,7 +57,7 @@ public class LogentryListActivity extends Activity {
 
         ListView logentryListView = (ListView) findViewById(R.id.logentry_list);
 
-        //====[LIST DATA]========//Logentry
+        //====[LIST DATA]========//
         LogentryAdapter logentryAdapter = (LogentryAdapter)((HeaderViewListAdapter)logentryListView.getAdapter()).getWrappedAdapter();
 
         logentryAdapter.getLogentryList().clear();
@@ -71,7 +68,7 @@ public class LogentryListActivity extends Activity {
         dataSource.close();
     }
 
-    public void viewDivesite(View view) {
+    public void viewLogentry(View view) {
         ViewGroup parent = (ViewGroup)view.getParent();
         CharSequence id = ((TextView)parent.findViewById(R.id.logentry_listitem_id)).getText();
         boolean viewIsHeader = id.equals("#");
@@ -82,7 +79,7 @@ public class LogentryListActivity extends Activity {
 
             Intent viewIntent = new Intent();
             viewIntent.putExtras(bundle);
-            viewIntent.setClass(this,ViewDivesiteActivity.class);
+            viewIntent.setClass(this,ViewLogentryActivity.class);
             startActivity(viewIntent);
         }
     }

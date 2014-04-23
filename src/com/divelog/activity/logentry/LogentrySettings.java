@@ -1,13 +1,9 @@
 package com.divelog.activity.logentry;
 
 import com.divelog.db.DataSource;
-import com.divelog.db.model.Divesite;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class LogentrySettings extends Activity {
 	

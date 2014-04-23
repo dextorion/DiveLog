@@ -1,0 +1,6 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <item android:id="@+id/logentry_edit_entry"
+        android:title="@string/logentry_edit_entry_title"
+        android:orderInCategory="100" />
+</menu>

@@ -7,7 +7,8 @@ import com.divelog.db.model.Divesite;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 
@@ -29,9 +30,38 @@ public class ViewDivesiteActivity extends Activity {
         ((TextView)findViewById(R.id.view_divesite_description)).setText(site.getDescription());
 	}
 	
+	@Override
+    public void onResume() {
+        super.onResume();
+        dataSource.open();
+
+        Bundle bundle = getIntent().getExtras();
+        Divesite site = dataSource.getDivesite(bundle.getInt("id"));
+        
+        ((TextView)findViewById(R.id.view_divesite_name)).setText(site.getName());
+        ((TextView)findViewById(R.id.view_divesite_description)).setText(site.getDescription());
+
+        dataSource.close();
+    }
+
 	
-	public void editDivesite(View view) {
-		//TODO: set divesite id
-		startActivity(new Intent(this, EditDivesiteActivity.class));
-	}
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.divesite_menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	switch(item.getItemId()) {
+            case R.id.divesite_edit_entry:
+            	Intent editDivesiteIntent = new Intent(this, EditDivesiteActivity.class);
+                editDivesiteIntent.putExtras(getIntent().getExtras());
+                startActivity(editDivesiteIntent);
+                return true;
+            	
+            default:
+            	return super.onOptionsItemSelected(item);
+        }
+    }
 }

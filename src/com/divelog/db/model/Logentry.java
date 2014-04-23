@@ -4,27 +4,31 @@ import android.text.format.Time;
 
 public class Logentry {
 
+	private long id;
 	private int num;
 	private Time date;
     private int duration;
-    private String gasType;
     private int gasIn;
-    private int gasUsed;
+    private int gasOut;
     private int depth;
 	private Divesite diveSite;
     private String description;
 	
-	public Logentry(int num, Time date, int duration, String gasType, int gasIn, int gasUsed, int depth, Divesite diveSite, String description) {
+	public Logentry(long id, int num, Time date, int duration, int gasIn, int gasOUt, int depth, Divesite diveSite, String description) {
+		this.id = id;
 		this.num = num;
 		this.date = date;
         this.duration = duration;
-        this.gasType = gasType;
         this.gasIn = gasIn;
-        this.gasUsed = gasUsed;
+        this.gasOut = gasOUt;
         this.depth = depth;
         this.diveSite = diveSite;
         this.description = description;
     }
+	
+	public long getId() {
+		return id;
+	}
 	
 	public int getNum() {
 		return num;
@@ -38,16 +42,12 @@ public class Logentry {
         return duration;
     }
 
-    public String getGasType() {
-        return gasType;
-    }
-
     public int getGasIn() {
         return gasIn;
     }
 
-    public int getGasUsed() {
-        return gasUsed;
+    public int getGasOut() {
+        return gasOut;
     }
 
     public int getDepth() {

@@ -22,8 +22,24 @@
     <string name="edit_logentry_num_label">Nr </string>
     <string name="edit_logentry_divesite_label">Divesite: </string>
     <string name="edit_logentry_description_label">Description: </string>
+    <string name="edit_logentry_date_label">Date: </string>
+    <string name="edit_logentry_date_hint">yyyy-mm-dd</string>
+    <string name="edit_Logentry_select_date">Select</string>
+    <string name="edit_logentry_duration_label">Duration:</string>
+    <string name="edit_logentry_duration_hint">min</string>
+    <string name="edit_logentry_gasin_label">Gas in:</string>
+    <string name="edit_logentry_gas_hint">bars</string>
+    <string name="edit_logentry_gasout_label">Gas out:</string>
+    <string name="edit_logentry_depth_label">Depth:</string>
+    <string name="edit_logentry_depth_hint">meter</string>
+    <string name="edit_logentry_description_hint">description...</string>
+    
+    
     <string name="edit_logentry_save_button_label">Save</string>
     <string name="edit_logentry_cancel_button_label">Cancel</string>
+    
+    <string name="divesite_edit_entry_title">Edit</string>
+    <string name="logentry_edit_entry_title">Edit</string> 
     
 
 </resources>
