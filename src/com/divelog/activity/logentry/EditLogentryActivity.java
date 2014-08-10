@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.divelog.R;
-import com.divelog.db.DataSource;
+import com.divelog.db.DBUtil;
 import com.divelog.db.model.Divesite;
 import com.divelog.db.model.Logentry;
 
@@ -25,7 +25,6 @@ import java.util.Locale;
 
 public class EditLogentryActivity extends Activity {
 	
-	DataSource dataSource;
 	
 	private TextView logentryDate; 
 	
@@ -40,25 +39,23 @@ public class EditLogentryActivity extends Activity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_logentry_layout);
         
-        dataSource = new DataSource(this);
-        dataSource.open();
 
         logentryDate = (TextView)findViewById(R.id.edit_logentry_date);
         
-        ((EditText)findViewById(R.id.edit_logentry_num)).setText(String.valueOf(dataSource.getNextLogentryNum()));
+        ((EditText)findViewById(R.id.edit_logentry_num)).setText(String.valueOf(DBUtil.db.getNextLogentryNum()));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner siteSpinner = (Spinner) findViewById(R.id.edit_logentry_divesite);
         siteSpinner.setAdapter(adapter);
         
-        List<Divesite> allDivesites = dataSource.getAllDivesites();
+        List<Divesite> allDivesites = DBUtil.db.getAllDivesites();
         for (Divesite divesite : allDivesites) {
             adapter.add(divesite.getName());
         }
         
         Bundle extras = getIntent().getExtras();
         if(extras != null && extras.containsKey("id")) {
-        	Logentry logentry = dataSource.getLogentry(extras.getInt("id"));
+        	Logentry logentry = DBUtil.db.getLogentry(extras.getInt("id"));
         	
         	Divesite divesite = logentry.getDiveSite();
         	
@@ -91,7 +88,7 @@ public class EditLogentryActivity extends Activity {
 		int num = Integer.parseInt(((EditText)findViewById(R.id.edit_logentry_num)).getText().toString());
 
 		Spinner siteSpinner = (Spinner)findViewById(R.id.edit_logentry_divesite);
-		Divesite divesite = dataSource.getDivesite((String)siteSpinner.getSelectedItem());
+		Divesite divesite = DBUtil.db.getDivesite((String)siteSpinner.getSelectedItem());
 
 		EditText dateString = (EditText)findViewById(R.id.edit_logentry_date);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -111,7 +108,7 @@ public class EditLogentryActivity extends Activity {
 		int gasOut = Integer.parseInt(((EditText)findViewById(R.id.edit_logentry_gasout)).getText().toString());
 		String description = ((EditText)findViewById(R.id.edit_logentry_description)).getText().toString();
 		
-		dataSource.createLogentry(num, date, duration, gasIn, gasOut, depth, divesite, description);
+		DBUtil.db.saveLogentry(num, date, duration, gasIn, gasOut, depth, divesite, description);
 		
 		finish();
 	}

@@ -1,13 +1,11 @@
 package com.divelog.activity.logentry;
 
-import com.divelog.db.DataSource;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
 public class LogentrySettings extends Activity {
 	
-	DataSource dataSource;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

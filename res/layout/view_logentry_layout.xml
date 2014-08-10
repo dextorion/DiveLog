@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/view_logentry_num_label"
-        android:text="@string/edit_logentry_num_label"
+        android:text="@string/logentry_num_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="20sp"
@@ -16,25 +16,130 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="60sp"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@id/view_logentry_num_label"
         android:layout_toRightOf="@id/view_logentry_num_label"/>
 
     <TextView
-            android:id="@+id/view_logentry_divesite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="250sp"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/view_logentry_num"/>
+        android:id="@+id/view_logentry_date_label"
+        android:text="@string/logentry_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="40sp"
+        android:layout_below="@id/view_logentry_num_label"
+        android:layout_alignParentLeft="true" />
+    
+    <TextView
+        android:id="@+id/view_logentry_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="250sp"
+        android:layout_toRightOf="@id/view_logentry_date_label"
+        android:layout_alignTop="@id/view_logentry_date_label" />
+            
+    <TextView
+       	android:id="@+id/view_logentry_divesite_label"
+       	android:text="@string/logentry_divesite_label"
+       	android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+       	android:width="70sp"
+       	android:layout_below="@id/view_logentry_date_label"
+       	android:layout_alignParentLeft="true" />
+    
+    <TextView
+        android:id="@+id/view_logentry_divesite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="250sp"
+        android:layout_toRightOf="@id/view_logentry_divesite_label"
+        android:layout_alignTop="@id/view_logentry_divesite_label"/>
 
+    <TextView 
+        android:id="@+id/view_logentry_duration_label"
+        android:text="@string/logentry_duration_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="70sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/view_logentry_divesite_label"
+        />
+    
+    <TextView
+        android:id="@+id/view_logentry_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="30sp"
+        android:layout_toRightOf="@id/view_logentry_duration_label"
+        android:layout_alignTop="@id/view_logentry_duration_label"
+        />
+    
+    <TextView 
+        android:id="@+id/view_logentry_depth_label"
+        android:text="@string/logentry_depth_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="60sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/view_logentry_duration_label"
+        />
+    
+    <TextView
+        android:id="@+id/view_logentry_depth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="30sp"
+        android:layout_toRightOf="@id/view_logentry_depth_label"
+        android:layout_alignTop="@id/view_logentry_depth_label"
+        />
+    
+    
+    
+    <TextView 
+        android:id="@+id/view_logentry_gasin_label"
+        android:text="@string/logentry_gasin_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="60sp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/view_logentry_depth_label"
+        />
+    
+    <TextView
+        android:id="@+id/view_logentry_gasin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="30sp"
+        android:layout_toRightOf="@id/view_logentry_gasin_label"
+        android:layout_alignTop="@id/view_logentry_gasin_label"
+        />
+    
+    <TextView 
+        android:id="@+id/view_logentry_gasout_label"
+        android:text="@string/logentry_gasout_label"
+        android:layout_marginLeft="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="60sp"
+        android:layout_toRightOf="@id/view_logentry_gasin"
+        android:layout_below="@id/view_logentry_depth_label"
+        />
+    
+    <TextView
+        android:id="@+id/view_logentry_gasout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="30sp"
+        android:layout_toRightOf="@id/view_logentry_gasout_label"
+        android:layout_alignTop="@id/view_logentry_gasout_label"
+        />
+    
     <TextView
         android:id="@+id/view_logentry_description_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/view_logentry_num_label"
+        android:layout_below="@id/view_logentry_gasin_label"
         android:layout_marginTop="15dp"
-        android:text="@string/edit_logentry_description_label" />
+        android:text="@string/logentry_description_label" />
 
     <TextView
         android:id="@+id/view_logentry_description"

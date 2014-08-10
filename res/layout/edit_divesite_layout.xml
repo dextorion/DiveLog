@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/edit_divesite_name_label"
-        android:text="@string/edit_divesite_name_label"
+        android:text="@string/divesite_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/edit_divesite_name"
@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/edit_divesite_description_label"
-        android:text="@string/edit_divesite_description_label"
+        android:text="@string/divesite_description_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/edit_divesite_description"
@@ -50,7 +50,7 @@
         
 	    <Button
 	        android:id="@+id/edit_divesite_save"
-	        android:text="@string/edit_divesite_save_button_label" 
+	        android:text="@string/divesite_save_button_label" 
 	        android:onClick="saveDivesite"
 	      	android:layout_width="0px"
 	        android:layout_weight="0.5"
@@ -59,7 +59,7 @@
 	
 	    <Button
 	        android:id="@+id/edit_divesite_cancel"
-	        android:text="@string/edit_divesite_cancel_button_label"
+	        android:text="@string/divesite_cancel_button_label"
 	        android:onClick="cancelDivesite"
 	        android:layout_width="0px"
 	        android:layout_weight="0.5"

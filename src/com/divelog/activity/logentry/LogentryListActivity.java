@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.divelog.R;
-import com.divelog.db.DataSource;
+import com.divelog.db.DBUtil;
 import com.divelog.db.model.Logentry;
 
 import android.os.Bundle;
@@ -21,13 +21,11 @@ import android.widget.TextView;
 
 public class LogentryListActivity extends Activity {
 
-	DataSource dataSource;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logentry_list_activity_layout);
-        dataSource = new DataSource(this);
 
         ListView logentryListView = (ListView) findViewById(R.id.logentry_list);
         
@@ -53,7 +51,6 @@ public class LogentryListActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-        dataSource.open();
 
         ListView logentryListView = (ListView) findViewById(R.id.logentry_list);
 
@@ -61,11 +58,10 @@ public class LogentryListActivity extends Activity {
         LogentryAdapter logentryAdapter = (LogentryAdapter)((HeaderViewListAdapter)logentryListView.getAdapter()).getWrappedAdapter();
 
         logentryAdapter.getLogentryList().clear();
-        logentryAdapter.getLogentryList().addAll(dataSource.getAllLogentries());
+        logentryAdapter.getLogentryList().addAll(DBUtil.db.getAllLogentries());
         logentryAdapter.notifyDataSetChanged();
         //-----------------------//
 
-        dataSource.close();
     }
 
     public void viewLogentry(View view) {

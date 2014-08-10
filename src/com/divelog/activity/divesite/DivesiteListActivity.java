@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.divelog.R;
-import com.divelog.db.DataSource;
+import com.divelog.db.DBUtil;
 import com.divelog.db.model.Divesite;
 
 import android.os.Bundle;
@@ -21,13 +21,10 @@ import android.widget.TextView;
 
 public class DivesiteListActivity extends Activity {
 
-	DataSource dataSource;
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.divesite_list_activity_layout);
-        dataSource = new DataSource(this);
         
         ListView divesiteListView = (ListView) findViewById(R.id.divesite_list);
          
@@ -52,7 +49,6 @@ public class DivesiteListActivity extends Activity {
     @Override
     public void onResume() {
     	super.onResume();
-    	dataSource.open();
     	
     	ListView divesiteListView = (ListView) findViewById(R.id.divesite_list);
 
@@ -60,11 +56,9 @@ public class DivesiteListActivity extends Activity {
     	DivesiteAdapter divesiteAdapter = (DivesiteAdapter)((HeaderViewListAdapter)divesiteListView.getAdapter()).getWrappedAdapter();
     	
     	divesiteAdapter.getDivesiteList().clear();
-    	divesiteAdapter.getDivesiteList().addAll(dataSource.getAllDivesites());
+    	divesiteAdapter.getDivesiteList().addAll(DBUtil.db.getAllDivesites());
     	divesiteAdapter.notifyDataSetChanged();
         //-----------------------//
-    	
-    	dataSource.close();
     	
     }
 

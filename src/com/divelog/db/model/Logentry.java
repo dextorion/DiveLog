@@ -14,15 +14,15 @@ public class Logentry {
 	private Divesite diveSite;
     private String description;
 	
-	public Logentry(long id, int num, Time date, int duration, int gasIn, int gasOUt, int depth, Divesite diveSite, String description) {
+	public Logentry(long id, int num, Time date, int duration, int gasIn, int gasOut, int depth, Divesite divesite, String description) {
 		this.id = id;
 		this.num = num;
 		this.date = date;
         this.duration = duration;
         this.gasIn = gasIn;
-        this.gasOut = gasOUt;
+        this.gasOut = gasOut;
         this.depth = depth;
-        this.diveSite = diveSite;
+        this.diveSite = divesite;
         this.description = description;
     }
 	

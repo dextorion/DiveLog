@@ -1,7 +1,7 @@
 package com.divelog.activity.divesite;
 
 import com.divelog.R;
-import com.divelog.db.DataSource;
+import com.divelog.db.DBUtil;
 import com.divelog.db.model.Divesite;
 
 import android.app.Activity;
@@ -13,18 +13,14 @@ import android.widget.TextView;
 
 
 public class ViewDivesiteActivity extends Activity {
-	
-	DataSource dataSource;
-	
+		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.view_divesite_layout);
-        dataSource = new DataSource(this);
-        dataSource.open();
         
         Bundle bundle = getIntent().getExtras();
-        Divesite site = dataSource.getDivesite(bundle.getInt("id"));
+        Divesite site = DBUtil.db.getDivesite(bundle.getInt("id"));
         
         ((TextView)findViewById(R.id.view_divesite_name)).setText(site.getName());
         ((TextView)findViewById(R.id.view_divesite_description)).setText(site.getDescription());
@@ -33,15 +29,12 @@ public class ViewDivesiteActivity extends Activity {
 	@Override
     public void onResume() {
         super.onResume();
-        dataSource.open();
 
         Bundle bundle = getIntent().getExtras();
-        Divesite site = dataSource.getDivesite(bundle.getInt("id"));
+        Divesite site = DBUtil.db.getDivesite(bundle.getInt("id"));
         
         ((TextView)findViewById(R.id.view_divesite_name)).setText(site.getName());
         ((TextView)findViewById(R.id.view_divesite_description)).setText(site.getDescription());
-
-        dataSource.close();
     }
 
 	
@@ -59,6 +52,11 @@ public class ViewDivesiteActivity extends Activity {
                 editDivesiteIntent.putExtras(getIntent().getExtras());
                 startActivity(editDivesiteIntent);
                 return true;
+                
+            case R.id.divesite_delete_entry:
+            	Bundle bundle = getIntent().getExtras();
+            	DBUtil.db.deleteDivesite(bundle.getInt("id"));
+            	return true;
             	
             default:
             	return super.onOptionsItemSelected(item);

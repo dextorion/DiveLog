@@ -8,40 +8,37 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.divelog.R;
-import com.divelog.db.DataSource;
+import com.divelog.db.DBUtil;
 import com.divelog.db.model.Logentry;
 
 
 public class ViewLogentryActivity extends Activity {
 	
-	DataSource dataSource;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.view_logentry_layout);
-        dataSource = new DataSource(this);
-        dataSource.open();
         
         Bundle bundle = getIntent().getExtras();
-        Logentry entry = dataSource.getLogentry(bundle.getInt("id"));
+        Logentry entry = DBUtil.db.getLogentry(bundle.getInt("id"));
         
         ((TextView)findViewById(R.id.view_logentry_num)).setText(String.valueOf(entry.getNum()));
-        ((TextView)findViewById(R.id.view_logentry_description)).setText(entry.getDescription());
+        ((TextView)findViewById(R.id.view_logentry_date)).setText(String.valueOf(entry.getDate().format("%Y-%m-%d")));
+        ((TextView)findViewById(R.id.view_logentry_divesite)).setText(entry.getDiveSite().getName());
+        ((TextView)findViewById(R.id.view_logentry_duration)).setText(String.valueOf(entry.getDuration()));
+        ((TextView)findViewById(R.id.view_logentry_depth)).setText(String.valueOf(entry.getDepth()));
 	}
 	
 	@Override
     public void onResume() {
         super.onResume();
-        dataSource.open();
 
         Bundle bundle = getIntent().getExtras();
-        Logentry entry = dataSource.getLogentry(bundle.getInt("id"));
+        Logentry entry = DBUtil.db.getLogentry(bundle.getInt("id"));
         
         ((TextView)findViewById(R.id.view_logentry_num)).setText(String.valueOf(entry.getNum()));
         ((TextView)findViewById(R.id.view_logentry_description)).setText(entry.getDescription());
-
-        dataSource.close();
     }
 	
 	

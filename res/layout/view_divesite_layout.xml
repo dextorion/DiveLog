@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/view_divesite_name_label"
-        android:text="@string/edit_divesite_name_label"
+        android:text="@string/divesite_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/view_divesite_name"
@@ -27,7 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/view_divesite_name_label"
         android:layout_marginTop="21dp"
-        android:text="@string/edit_divesite_description_label" />
+        android:text="@string/divesite_description_label" />
 
     <TextView
         android:id="@+id/view_divesite_description"
