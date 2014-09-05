@@ -26,7 +26,9 @@ public class LogentryListActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logentry_list_activity_layout);
-
+        
+        setTitle("Logbook");
+        
         ListView logentryListView = (ListView) findViewById(R.id.logentry_list);
         
         //=====[HEADER ITEM]===============================================================

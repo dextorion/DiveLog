@@ -18,12 +18,7 @@ public class ViewDivesiteActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.view_divesite_layout);
-        
-        Bundle bundle = getIntent().getExtras();
-        Divesite site = DBUtil.db.getDivesite(bundle.getInt("id"));
-        
-        ((TextView)findViewById(R.id.view_divesite_name)).setText(site.getName());
-        ((TextView)findViewById(R.id.view_divesite_description)).setText(site.getDescription());
+        setTitle("Divesite");
 	}
 	
 	@Override
@@ -36,7 +31,6 @@ public class ViewDivesiteActivity extends Activity {
         ((TextView)findViewById(R.id.view_divesite_name)).setText(site.getName());
         ((TextView)findViewById(R.id.view_divesite_description)).setText(site.getDescription());
     }
-
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,6 +50,7 @@ public class ViewDivesiteActivity extends Activity {
             case R.id.divesite_delete_entry:
             	Bundle bundle = getIntent().getExtras();
             	DBUtil.db.deleteDivesite(bundle.getInt("id"));
+            	finish();
             	return true;
             	
             default:

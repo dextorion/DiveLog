@@ -26,6 +26,8 @@ public class DivesiteListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.divesite_list_activity_layout);
         
+        setTitle("Divesites");
+        
         ListView divesiteListView = (ListView) findViewById(R.id.divesite_list);
          
         //=====[LIST HEADER]=====//

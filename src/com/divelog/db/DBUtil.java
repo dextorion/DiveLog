@@ -178,6 +178,10 @@ public class DBUtil extends SQLiteOpenHelper {
 
         return logentries;
     }
+    
+    public void deleteLogentry(int id) {
+		getWritableDatabase().delete(DBUtil.TABLE_LOGENTRIES, "id = ?", new String[] {String.valueOf(id)});
+	}
 
     private Logentry extractLogentry(Cursor cursor) {
         Time time = new Time();

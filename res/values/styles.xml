@@ -1,5 +1,11 @@
 <resources>
-
-    <style name="AppTheme" parent="android:Theme.Light" />
+    
+    <style name="DiveLogTheme" parent="android:Theme.Holo">
+	  <item name="android:actionBarStyle">@style/DiveLogActionBar</item>
+	</style>
+	
+	<style name="DiveLogActionBar" parent="android:Widget.Holo.ActionBar">
+	  <item name="android:icon">@android:color/transparent</item>
+	</style>
 
 </resources>

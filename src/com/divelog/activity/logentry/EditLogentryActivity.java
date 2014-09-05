@@ -39,6 +39,8 @@ public class EditLogentryActivity extends Activity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_logentry_layout);
         
+        setTitle("Edit log");
+        
 
         logentryDate = (TextView)findViewById(R.id.edit_logentry_date);
         
@@ -108,7 +110,12 @@ public class EditLogentryActivity extends Activity {
 		int gasOut = Integer.parseInt(((EditText)findViewById(R.id.edit_logentry_gasout)).getText().toString());
 		String description = ((EditText)findViewById(R.id.edit_logentry_description)).getText().toString();
 		
-		DBUtil.db.saveLogentry(num, date, duration, gasIn, gasOut, depth, divesite, description);
+		Bundle extras = getIntent().getExtras();
+    	if(extras != null && extras.containsKey("id")) {
+    		DBUtil.db.saveLogentry(extras.getInt("id"), num, date, duration, gasIn, gasOut, depth, divesite, description);
+    	} else {
+    		DBUtil.db.saveLogentry(num, date, duration, gasIn, gasOut, depth, divesite, description);
+    	}
 		
 		finish();
 	}

@@ -18,11 +18,13 @@ public class EditDivesiteActivity extends Activity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_divesite_layout);
         
+        setTitle("Edit divesite");
+        
         Bundle extras = getIntent().getExtras();
         if(extras != null && extras.containsKey("id")) {
         	Divesite divesite = DBUtil.db.getDivesite(extras.getInt("id"));
-        	((EditText)findViewById(R.id.edit_divesite_name)).setText(divesite.getName());;
-    		((EditText)findViewById(R.id.edit_divesite_description)).setText(divesite.getDescription());;
+        	((EditText)findViewById(R.id.edit_divesite_name)).setText(divesite.getName());
+    		((EditText)findViewById(R.id.edit_divesite_description)).setText(divesite.getDescription());
         }
 	}
 	

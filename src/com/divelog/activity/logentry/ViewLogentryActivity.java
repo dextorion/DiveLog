@@ -19,15 +19,7 @@ public class ViewLogentryActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.view_logentry_layout);
-        
-        Bundle bundle = getIntent().getExtras();
-        Logentry entry = DBUtil.db.getLogentry(bundle.getInt("id"));
-        
-        ((TextView)findViewById(R.id.view_logentry_num)).setText(String.valueOf(entry.getNum()));
-        ((TextView)findViewById(R.id.view_logentry_date)).setText(String.valueOf(entry.getDate().format("%Y-%m-%d")));
-        ((TextView)findViewById(R.id.view_logentry_divesite)).setText(entry.getDiveSite().getName());
-        ((TextView)findViewById(R.id.view_logentry_duration)).setText(String.valueOf(entry.getDuration()));
-        ((TextView)findViewById(R.id.view_logentry_depth)).setText(String.valueOf(entry.getDepth()));
+        setTitle("Log");
 	}
 	
 	@Override
@@ -38,6 +30,12 @@ public class ViewLogentryActivity extends Activity {
         Logentry entry = DBUtil.db.getLogentry(bundle.getInt("id"));
         
         ((TextView)findViewById(R.id.view_logentry_num)).setText(String.valueOf(entry.getNum()));
+        ((TextView)findViewById(R.id.view_logentry_date)).setText(String.valueOf(entry.getDate().format("%Y-%m-%d")));
+        ((TextView)findViewById(R.id.view_logentry_divesite)).setText(entry.getDiveSite().getName());
+        ((TextView)findViewById(R.id.view_logentry_duration)).setText(String.valueOf(entry.getDuration()));
+        ((TextView)findViewById(R.id.view_logentry_depth)).setText(String.valueOf(entry.getDepth()));
+        ((TextView)findViewById(R.id.view_logentry_gasin)).setText(String.valueOf(entry.getGasIn()));
+        ((TextView)findViewById(R.id.view_logentry_gasout)).setText(String.valueOf(entry.getGasOut()));
         ((TextView)findViewById(R.id.view_logentry_description)).setText(entry.getDescription());
     }
 	
@@ -56,6 +54,12 @@ public class ViewLogentryActivity extends Activity {
                 editLogentryIntent.putExtras(getIntent().getExtras());
                 startActivity(editLogentryIntent);
                 return true;
+                
+            case R.id.logentry_delete_entry:
+            	Bundle bundle = getIntent().getExtras();
+            	DBUtil.db.deleteLogentry(bundle.getInt("id"));
+            	finish();
+            	return true;
             	
             default:
             	return super.onOptionsItemSelected(item);
