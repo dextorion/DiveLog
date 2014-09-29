@@ -121,7 +121,6 @@ public class DBUtil extends SQLiteOpenHelper {
 		getWritableDatabase().delete(DBUtil.TABLE_DIVESITES, "id = ?", new String[] {String.valueOf(id)});
 	}
 
-
 	public int getNextLogentryNum() {
 		Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_LOGENTRIES, new String[]{"num"}, null, null, null, null, "num DESC", "1");
 		cursor.moveToFirst();
@@ -133,6 +132,18 @@ public class DBUtil extends SQLiteOpenHelper {
 	}
 	
 	public Logentry saveLogentry(Integer id, int num, Time date, int duration, int gasIn, int gasOut, int depth, Divesite divesite, String description) {
+		
+		SQLiteDatabase database = getWritableDatabase();
+
+		if(getLogentry(num) != null) {
+			int nextNum = getNextLogentryNum();
+			for(int i = num; i < nextNum; i++) {
+				ContentValues values = new ContentValues();
+				values.put("num", i+1);
+				database.update(DBUtil.TABLE_LOGENTRIES, values, "num = ?", new String[] {String.valueOf(i)});
+			}
+		}
+		
 		ContentValues values = new ContentValues();
         values.put("num", num);
         values.put("date", date.format2445());
@@ -155,8 +166,8 @@ public class DBUtil extends SQLiteOpenHelper {
         return logentry;
 	}
 	
-    public Logentry getLogentry(int id) {
-        Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_LOGENTRIES, null, "num = " + id, null, null, null, null);
+    public Logentry getLogentry(int num) {
+        Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_LOGENTRIES, null, "num = " + num, null, null, null, null);
         cursor.moveToFirst();
 
         Logentry logentry = extractLogentry(cursor);
