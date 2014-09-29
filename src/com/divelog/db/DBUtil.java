@@ -135,15 +135,6 @@ public class DBUtil extends SQLiteOpenHelper {
 		
 		SQLiteDatabase database = getWritableDatabase();
 
-		if(getLogentry(num) != null) {
-			int nextNum = getNextLogentryNum();
-			for(int i = num; i < nextNum; i++) {
-				ContentValues values = new ContentValues();
-				values.put("num", i+1);
-				database.update(DBUtil.TABLE_LOGENTRIES, values, "num = ?", new String[] {String.valueOf(i)});
-			}
-		}
-		
 		ContentValues values = new ContentValues();
         values.put("num", num);
         values.put("date", date.format2445());
@@ -159,6 +150,19 @@ public class DBUtil extends SQLiteOpenHelper {
 			getWritableDatabase().update(DBUtil.TABLE_LOGENTRIES, values, "id = ?", new String[] {id.toString()});
 			logentry = new Logentry(id, num, date, duration, gasIn, gasOut, depth, divesite, description);
 		} else {
+			
+			if(getLogentry(num) != null) {
+				int nextNum = getNextLogentryNum();
+				if(num < nextNum) {
+					ContentValues numvalues = new ContentValues();
+					for(int i = nextNum-1; i >= num; i--) {
+						numvalues.clear();
+						numvalues.put("num", i+1);
+						database.update(DBUtil.TABLE_LOGENTRIES, numvalues, "num = ?", new String[] {String.valueOf(i)});
+					}
+				}
+			}
+			
 			Long newId = getWritableDatabase().insert(DBUtil.TABLE_LOGENTRIES, null, values);
 			logentry = new Logentry(newId, num, date, duration, gasIn, gasOut, depth, divesite, description);
 		}
@@ -195,7 +199,10 @@ public class DBUtil extends SQLiteOpenHelper {
 	}
 
     private Logentry extractLogentry(Cursor cursor) {
-        Time time = new Time();
+        if(cursor.getCount() == 0)
+        	return null;
+    	
+    	Time time = new Time();
 
         int id = cursor.getInt(DBUtil.LOGENTRY_ID_COLUMN);
         int num = cursor.getInt(DBUtil.LOGENTRY_NUM_COLUMN);
