@@ -40,14 +40,12 @@ public class EditLogentryActivity extends Activity {
         setContentView(R.layout.edit_logentry_layout);
         
         setTitle("Edit log");
-
-        logentryDate = (TextView)findViewById(R.id.edit_logentry_date);
-        
-        
     }
 	
 	public void onResume() {
 		super.onResume();
+		
+		logentryDate = (TextView)findViewById(R.id.edit_logentry_date);
 		
 		((EditText)findViewById(R.id.edit_logentry_num)).setText(String.valueOf(DBUtil.db.getNextLogentryNum()));
 
@@ -75,7 +73,6 @@ public class EditLogentryActivity extends Activity {
         	month = date.month;
         	day = date.monthDay;
         	
-        	logentryDate.setText(new StringBuilder().append(year).append("-").append(month).append("-").append(day));
         	((EditText)findViewById(R.id.edit_logentry_num)).setText(String.valueOf(logentry.getNum()));
         	((EditText)findViewById(R.id.edit_logentry_duration)).setText(String.valueOf(logentry.getDuration()));
     		((EditText)findViewById(R.id.edit_logentry_depth)).setText(String.valueOf(logentry.getDepth()));
@@ -86,9 +83,10 @@ public class EditLogentryActivity extends Activity {
         } else {
 	        final Calendar c = Calendar.getInstance();
 	        year = c.get(Calendar.YEAR);
-	        month = c.get(Calendar.MONTH);
+	        month = c.get(Calendar.MONTH)+1;
 	        day = c.get(Calendar.DAY_OF_MONTH);
         }
+        logentryDate.setText(new StringBuilder().append(year).append("-").append(month).append("-").append(day));
 	}
 	
 	@Override
