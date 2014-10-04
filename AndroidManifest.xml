@@ -23,10 +23,10 @@
         
         <activity android:name="com.divelog.activity.divesite.DivesiteListActivity" />
         <activity android:name="com.divelog.activity.divesite.ViewDivesiteActivity" />
-        <activity android:name="com.divelog.activity.divesite.EditDivesiteActivity" />
+        <activity android:name="com.divelog.activity.divesite.EditDivesiteActivity" android:windowSoftInputMode="stateAlwaysVisible"/>
         <activity android:name="com.divelog.activity.logentry.LogentryListActivity" />
         <activity android:name="com.divelog.activity.logentry.ViewLogentryActivity" />
-        <activity android:name="com.divelog.activity.logentry.EditLogentryActivity" />
+        <activity android:name="com.divelog.activity.logentry.EditLogentryActivity" android:windowSoftInputMode="stateAlwaysVisible"/>
 
     </application>
 

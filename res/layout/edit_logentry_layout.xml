@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/edit_logentry_divesite"
         android:layout_alignParentTop="true"
-        android:inputType="number">
+        android:inputType="number"
+        android:nextFocusDown="@id/edit_logentry_divesite">
     </EditText>
     
     <TextView
@@ -63,7 +64,8 @@
 		android:layout_width="260dp"
 		android:layout_height="wrap_content"
 		android:layout_alignParentRight="true"
-		android:layout_below="@id/edit_logentry_date"/>
+		android:layout_below="@id/edit_logentry_date"
+		android:nextFocusDown="@+id/edit_logentry_duration"/>
     
     
     <TextView
@@ -71,7 +73,7 @@
         android:text="@string/logentry_duration_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/edit_logentry_duration"
+        android:layout_alignTop="@id/edit_logentry_duration"
         android:layout_marginTop="13dp"/>
     
     <EditText
@@ -81,7 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_logentry_divesite"
         android:layout_alignLeft="@id/edit_logentry_divesite"
-        android:inputType="number">
+        android:inputType="number"
+        android:nextFocusDown="@+id/edit_logentry_depth">
     </EditText>
     
     <TextView
@@ -89,7 +92,7 @@
         android:text="@string/logentry_depth_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/edit_logentry_depth"
+        android:layout_alignTop="@id/edit_logentry_depth"
         android:layout_toLeftOf="@id/edit_logentry_depth"
         android:layout_marginTop="13dp"
         android:layout_marginRight="3dp"/>
@@ -101,7 +104,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_logentry_divesite"
         android:layout_alignParentRight="true"
-        android:inputType="number">
+        android:inputType="number"
+        android:nextFocusDown="@+id/edit_logentry_gasin">
     </EditText>
     
     
@@ -110,7 +114,7 @@
         android:text="@string/logentry_gasin_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/edit_logentry_gasin"
+        android:layout_alignTop="@id/edit_logentry_gasin"
         android:layout_marginTop="13dp"/>
     
     <EditText
@@ -120,7 +124,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_logentry_duration"
         android:layout_alignLeft="@id/edit_logentry_divesite"
-        android:inputType="number">
+        android:inputType="number"
+        android:nextFocusDown="@+id/edit_logentry_gasout">
     </EditText>
     
     <TextView
@@ -128,7 +133,7 @@
         android:text="@string/logentry_gasout_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/edit_logentry_gasout"
+        android:layout_alignTop="@id/edit_logentry_gasout"
         android:layout_toLeftOf="@id/edit_logentry_gasout"
         android:layout_marginTop="13dp"
         android:layout_marginRight="3dp"/>
@@ -140,7 +145,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_logentry_duration"
         android:layout_alignParentRight="true"
-        android:inputType="number">
+        android:inputType="number"
+        android:nextFocusDown="@+id/edit_logentry_description">
     </EditText>
     
     <EditText
@@ -152,7 +158,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/edit_logentry_gasout"
         android:height="180dp"
-        android:inputType="textMultiLine">
+        android:inputType="textMultiLine|textCapSentences">
     </EditText>
     
     
