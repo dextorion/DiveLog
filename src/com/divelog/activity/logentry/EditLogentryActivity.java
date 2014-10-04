@@ -40,12 +40,18 @@ public class EditLogentryActivity extends Activity {
         setContentView(R.layout.edit_logentry_layout);
         
         setTitle("Edit log");
-        
 
         logentryDate = (TextView)findViewById(R.id.edit_logentry_date);
         
-        ((EditText)findViewById(R.id.edit_logentry_num)).setText(String.valueOf(DBUtil.db.getNextLogentryNum()));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        
+    }
+	
+	public void onResume() {
+		super.onResume();
+		
+		((EditText)findViewById(R.id.edit_logentry_num)).setText(String.valueOf(DBUtil.db.getNextLogentryNum()));
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner siteSpinner = (Spinner) findViewById(R.id.edit_logentry_divesite);
         siteSpinner.setAdapter(adapter);
@@ -54,10 +60,10 @@ public class EditLogentryActivity extends Activity {
         for (Divesite divesite : allDivesites) {
             adapter.add(divesite.getName());
         }
-        
+
         Bundle extras = getIntent().getExtras();
         if(extras != null && extras.containsKey("id")) {
-        	Logentry logentry = DBUtil.db.getLogentry(extras.getInt("id"));
+        	Logentry logentry = DBUtil.db.getLogentry(extras.getLong("id"));
         	
         	Divesite divesite = logentry.getDiveSite();
         	
@@ -83,7 +89,7 @@ public class EditLogentryActivity extends Activity {
 	        month = c.get(Calendar.MONTH);
 	        day = c.get(Calendar.DAY_OF_MONTH);
         }
-    }
+	}
 	
 	public void saveLogentry(View v) {
 		
@@ -112,11 +118,13 @@ public class EditLogentryActivity extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
     	if(extras != null && extras.containsKey("id")) {
-    		DBUtil.db.saveLogentry(extras.getInt("id"), num, date, duration, gasIn, gasOut, depth, divesite, description);
+    		DBUtil.db.saveLogentry(extras.getLong("id"), num, date, duration, gasIn, gasOut, depth, divesite, description);
     	} else {
     		DBUtil.db.saveLogentry(num, date, duration, gasIn, gasOut, depth, divesite, description);
     	}
 		
+    	getIntent().putExtra("num", num);
+    	setResult(RESULT_OK, getIntent());
 		finish();
 	}
 	

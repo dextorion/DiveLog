@@ -14,6 +14,9 @@ import com.divelog.db.model.Logentry;
 
 public class ViewLogentryActivity extends Activity {
 	
+	private Logentry entry;
+	
+	private int editLogentryRequestCode = 10;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class ViewLogentryActivity extends Activity {
         super.onResume();
 
         Bundle bundle = getIntent().getExtras();
-        Logentry entry = DBUtil.db.getLogentry(bundle.getInt("id"));
+        entry = DBUtil.db.getLogentryByNum(bundle.getInt("num"));
         
         ((TextView)findViewById(R.id.view_logentry_num)).setText(String.valueOf(entry.getNum()));
         ((TextView)findViewById(R.id.view_logentry_date)).setText(String.valueOf(entry.getDate().format("%Y-%m-%d")));
@@ -39,6 +42,14 @@ public class ViewLogentryActivity extends Activity {
         ((TextView)findViewById(R.id.view_logentry_description)).setText(entry.getDescription());
     }
 	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode == editLogentryRequestCode && resultCode == RESULT_OK) {
+			getIntent().putExtra("num", data.getIntExtra("num", 0));
+		}
+	}
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,13 +62,12 @@ public class ViewLogentryActivity extends Activity {
     	switch(item.getItemId()) {
             case R.id.logentry_edit_entry:
             	Intent editLogentryIntent = new Intent(this, EditLogentryActivity.class);
-                editLogentryIntent.putExtras(getIntent().getExtras());
-                startActivity(editLogentryIntent);
+            	editLogentryIntent.putExtra("id", entry.getId());
+                startActivityForResult(editLogentryIntent, editLogentryRequestCode);
                 return true;
                 
             case R.id.logentry_delete_entry:
-            	Bundle bundle = getIntent().getExtras();
-            	DBUtil.db.deleteLogentry(bundle.getInt("id"));
+            	DBUtil.db.deleteLogentry(entry.getId());
             	finish();
             	return true;
             	

@@ -131,7 +131,7 @@ public class DBUtil extends SQLiteOpenHelper {
 		return saveLogentry(null, num, date, duration, gasIn, gasOut, depth, divesite, description);
 	}
 	
-	public Logentry saveLogentry(Integer id, int num, Time date, int duration, int gasIn, int gasOut, int depth, Divesite divesite, String description) {
+	public Logentry saveLogentry(Long id, int num, Time date, int duration, int gasIn, int gasOut, int depth, Divesite divesite, String description) {
 		
 		SQLiteDatabase database = getWritableDatabase();
 
@@ -146,31 +146,41 @@ public class DBUtil extends SQLiteOpenHelper {
         values.put("description", description);
         
         Logentry logentry = null;
+        
 		if(id != null && id != 0) {
-			getWritableDatabase().update(DBUtil.TABLE_LOGENTRIES, values, "id = ?", new String[] {id.toString()});
+			database.update(DBUtil.TABLE_LOGENTRIES, values, "id = ?", new String[] {id.toString()});
 			logentry = new Logentry(id, num, date, duration, gasIn, gasOut, depth, divesite, description);
 		} else {
-			
-			if(getLogentry(num) != null) {
+			if(getLogentryByNum(num) != null) {
 				int nextNum = getNextLogentryNum();
 				if(num < nextNum) {
 					ContentValues numvalues = new ContentValues();
 					for(int i = nextNum-1; i >= num; i--) {
 						numvalues.clear();
 						numvalues.put("num", i+1);
+						
 						database.update(DBUtil.TABLE_LOGENTRIES, numvalues, "num = ?", new String[] {String.valueOf(i)});
 					}
 				}
 			}
 			
-			Long newId = getWritableDatabase().insert(DBUtil.TABLE_LOGENTRIES, null, values);
+			Long newId = database.insert(DBUtil.TABLE_LOGENTRIES, null, values);
 			logentry = new Logentry(newId, num, date, duration, gasIn, gasOut, depth, divesite, description);
 		}
         
         return logentry;
 	}
 	
-    public Logentry getLogentry(int num) {
+	 public Logentry getLogentry(long id) {
+        Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_LOGENTRIES, null, "id = " + id, null, null, null, null);
+        cursor.moveToFirst();
+
+        Logentry logentry = extractLogentry(cursor);
+        cursor.close();
+        return logentry;
+    }
+	
+    public Logentry getLogentryByNum(int num) {
         Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_LOGENTRIES, null, "num = " + num, null, null, null, null);
         cursor.moveToFirst();
 
@@ -194,7 +204,7 @@ public class DBUtil extends SQLiteOpenHelper {
         return logentries;
     }
     
-    public void deleteLogentry(int id) {
+    public void deleteLogentry(long id) {
 		getWritableDatabase().delete(DBUtil.TABLE_LOGENTRIES, "id = ?", new String[] {String.valueOf(id)});
 	}
 

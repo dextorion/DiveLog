@@ -35,7 +35,7 @@ public class LogentryListActivity extends Activity {
         LayoutInflater inflater = LayoutInflater.from(this);
         
         View headerView = inflater.inflate(R.layout.logentry_listitem_layout, null); 
-        ((TextView)headerView.findViewById(R.id.logentry_listitem_id)).setText("#");
+        ((TextView)headerView.findViewById(R.id.logentry_listitem_num)).setText("#");
         ((TextView)headerView.findViewById(R.id.logentry_listitem_date)).setText("Date");
         ((TextView)headerView.findViewById(R.id.logentry_listitem_dive_site)).setText("Dive site");
         
@@ -68,16 +68,12 @@ public class LogentryListActivity extends Activity {
 
     public void viewLogentry(View view) {
         ViewGroup parent = (ViewGroup)view.getParent();
-        CharSequence id = ((TextView)parent.findViewById(R.id.logentry_listitem_id)).getText();
+        CharSequence id = ((TextView)parent.findViewById(R.id.logentry_listitem_num)).getText();
         boolean viewIsHeader = id.equals("#");
 
         if(!viewIsHeader) {
-            Bundle bundle = new Bundle();
-            bundle.putInt("id", Integer.parseInt(id.toString()));
-
-            Intent viewIntent = new Intent();
-            viewIntent.putExtras(bundle);
-            viewIntent.setClass(this,ViewLogentryActivity.class);
+        	Intent viewIntent = new Intent(this,ViewLogentryActivity.class);
+        	viewIntent.putExtra("num", Integer.parseInt(id.toString()));
             startActivity(viewIntent);
         }
     }

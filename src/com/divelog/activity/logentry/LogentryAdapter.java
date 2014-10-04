@@ -20,7 +20,7 @@ public class LogentryAdapter extends BaseAdapter {
 	private List<Logentry> logEntryList;
 	
 	static class LogEntryViewHolder {
-	    TextView id;
+	    TextView num;
 	    TextView date;
 	    TextView diveSite;
 	}
@@ -54,7 +54,7 @@ public class LogentryAdapter extends BaseAdapter {
 		if(convertView == null) {
 			convertView = inflater.inflate(R.layout.logentry_listitem_layout, null);
 			viewHolder = new LogEntryViewHolder();
-			viewHolder.id = (TextView)convertView.findViewById(R.id.logentry_listitem_id);
+			viewHolder.num = (TextView)convertView.findViewById(R.id.logentry_listitem_num);
 			viewHolder.date = (TextView)convertView.findViewById(R.id.logentry_listitem_date);
 			viewHolder.diveSite = (TextView)convertView.findViewById(R.id.logentry_listitem_dive_site);
 			
@@ -63,7 +63,7 @@ public class LogentryAdapter extends BaseAdapter {
 			viewHolder = (LogEntryViewHolder) convertView.getTag();
 		}
 		
-		viewHolder.id.setText(String.valueOf(this.logEntryList.get(position).getNum()));
+		viewHolder.num.setText(String.valueOf(this.logEntryList.get(position).getNum()));
 		viewHolder.date.setText(this.logEntryList.get(position).getDate().format("%G-%m-%d"));
 		viewHolder.diveSite.setText(this.logEntryList.get(position).getDiveSite().getName());
 		
