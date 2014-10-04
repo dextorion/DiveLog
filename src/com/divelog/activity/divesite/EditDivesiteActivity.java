@@ -6,7 +6,6 @@ import com.divelog.db.model.Divesite;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,8 +27,8 @@ public class EditDivesiteActivity extends Activity {
         }
 	}
 	
-	public void saveDivesite(View v) {
-		
+	@Override
+	public void onBackPressed() {
 		EditText name = (EditText)findViewById(R.id.edit_divesite_name);
 		EditText description = (EditText)findViewById(R.id.edit_divesite_description);
 		
@@ -38,10 +37,6 @@ public class EditDivesiteActivity extends Activity {
 		
 		Toast.makeText(this, "Divesite saved", Toast.LENGTH_SHORT).show();
 		
-		finish();
-	}
-	
-	public void cancelDivesite(View v) {
 		finish();
 	}
 }

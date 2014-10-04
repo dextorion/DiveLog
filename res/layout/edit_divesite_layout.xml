@@ -41,30 +41,5 @@
         android:layout_alignBaseline="@id/edit_divesite_description"
         android:layout_alignBottom="@id/edit_divesite_description"
         android:layout_alignParentLeft="true"/>
-
-    <LinearLayout
-    	android:layout_width="fill_parent" 
-    	android:layout_height="wrap_content"
-    	android:weightSum="1.0"
-    	android:layout_alignParentBottom="true" >
-        
-	    <Button
-	        android:id="@+id/edit_divesite_save"
-	        android:text="@string/divesite_save_button_label" 
-	        android:onClick="saveDivesite"
-	      	android:layout_width="0px"
-	        android:layout_weight="0.5"
-	        android:layout_height="wrap_content"
-	        />
-	
-	    <Button
-	        android:id="@+id/edit_divesite_cancel"
-	        android:text="@string/divesite_cancel_button_label"
-	        android:onClick="cancelDivesite"
-	        android:layout_width="0px"
-	        android:layout_weight="0.5"
-	        android:layout_height="wrap_content"
-	         />
-    </LinearLayout>
     
 </RelativeLayout>
