@@ -152,14 +152,21 @@ public class DBUtil extends SQLiteOpenHelper {
 			logentry = new Logentry(id, num, date, duration, gasIn, gasOut, depth, divesite, description);
 		} else {
 			if(getLogentryByNum(num) != null) {
+				
+				ContentValues numvalues = new ContentValues();
 				int nextNum = getNextLogentryNum();
 				if(num < nextNum) {
-					ContentValues numvalues = new ContentValues();
-					for(int i = nextNum-1; i >= num; i--) {
-						numvalues.clear();
-						numvalues.put("num", i+1);
-						
-						database.update(DBUtil.TABLE_LOGENTRIES, numvalues, "num = ?", new String[] {String.valueOf(i)});
+					List<Logentry> entries = getLogentries(num, nextNum);
+					
+					for(int i = 0; i < entries.size(); i++) {
+						Logentry entry = entries.get(i);
+						if(entry.getNum() == num+i) {
+							numvalues.clear();
+							numvalues.put("num", num+i+1);
+							database.update(DBUtil.TABLE_LOGENTRIES, numvalues, "id = ?", new String[] {String.valueOf(entry.getId())});
+						} else {
+							break;
+						}
 					}
 				}
 			}
@@ -188,10 +195,25 @@ public class DBUtil extends SQLiteOpenHelper {
         cursor.close();
         return logentry;
     }
+    
+    public List<Logentry> getLogentries(int from, int to) {
+    	List<Logentry> logentries = new ArrayList<Logentry>();
+        Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_LOGENTRIES, null, "num >= "+from+" and num < "+to, null, null, null, "num");
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            logentries.add(extractLogentry(cursor));
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return logentries;
+    }
 
     public List<Logentry> getAllLogentries() {
         List<Logentry> logentries = new ArrayList<Logentry>();
-        Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_LOGENTRIES, null, null, null, null, null, null);
+        Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_LOGENTRIES, null, null, null, null, null, "num");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
