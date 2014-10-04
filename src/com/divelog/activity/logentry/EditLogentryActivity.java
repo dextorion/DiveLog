@@ -108,21 +108,24 @@ public class EditLogentryActivity extends Activity {
 			return;
 		}
 
-		int duration = Integer.parseInt(((EditText)findViewById(R.id.edit_logentry_duration)).getText().toString());
-		int depth = Integer.parseInt(((EditText)findViewById(R.id.edit_logentry_depth)).getText().toString());
-		int gasIn = Integer.parseInt(((EditText)findViewById(R.id.edit_logentry_gasin)).getText().toString());
-		int gasOut = Integer.parseInt(((EditText)findViewById(R.id.edit_logentry_gasout)).getText().toString());
+		String duration = ((EditText)findViewById(R.id.edit_logentry_duration)).getText().toString();
+		String depth = ((EditText)findViewById(R.id.edit_logentry_depth)).getText().toString();
+		String gasIn = ((EditText)findViewById(R.id.edit_logentry_gasin)).getText().toString();
+		String gasOut = ((EditText)findViewById(R.id.edit_logentry_gasout)).getText().toString();
 		String description = ((EditText)findViewById(R.id.edit_logentry_description)).getText().toString();
 		
-		Bundle extras = getIntent().getExtras();
-    	if(extras != null && extras.containsKey("id")) {
-    		DBUtil.db.saveLogentry(extras.getLong("id"), num, date, duration, gasIn, gasOut, depth, divesite, description);
-    	} else {
-    		DBUtil.db.saveLogentry(num, date, duration, gasIn, gasOut, depth, divesite, description);
-    	}
+		if(!duration.isEmpty() && !depth.isEmpty()) {
+			Bundle extras = getIntent().getExtras();
+			if(extras != null && extras.containsKey("id")) {
+				DBUtil.db.saveLogentry(extras.getLong("id"), num, date, Integer.parseInt(duration), gasIn.isEmpty() ? 0 : Integer.parseInt(gasIn), gasOut.isEmpty() ? 0 : Integer.parseInt(gasOut), Integer.parseInt(depth), divesite, description);
+			} else {
+				DBUtil.db.saveLogentry(num, date, Integer.parseInt(duration), gasIn.isEmpty() ? 0 : Integer.parseInt(gasIn), gasOut.isEmpty() ? 0 : Integer.parseInt(gasOut), Integer.parseInt(depth), divesite, description);
+			}
+			
+			getIntent().putExtra("num", num);
+			setResult(RESULT_OK, getIntent());
+		}
 		
-    	getIntent().putExtra("num", num);
-    	setResult(RESULT_OK, getIntent());
 		finish();
 	}
 	
