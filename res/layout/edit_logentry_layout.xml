@@ -156,29 +156,4 @@
     </EditText>
     
     
-    <LinearLayout 
-    	android:layout_width="fill_parent" 
-    	android:layout_height="wrap_content"
-    	android:weightSum="1.0"
-    	android:layout_alignParentBottom="true" >
-        
-	    <Button
-	        android:id="@+id/edit_logentry_save"
-	        android:text="@string/logentry_save_button_label" 
-	        android:onClick="saveLogentry"
-	      	android:layout_width="0px"
-	        android:layout_weight="0.5"
-	        android:layout_height="wrap_content"
-	        />
-	
-	    <Button
-	        android:id="@+id/edit_logentrye_cancel"
-	        android:text="@string/logentry_cancel_button_label"
-	        android:onClick="cancelLogentry"
-	        android:layout_width="0px"
-	        android:layout_weight="0.5"
-	        android:layout_height="wrap_content"
-	         />
-    </LinearLayout>
-    
 </RelativeLayout>

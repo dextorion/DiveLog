@@ -91,8 +91,8 @@ public class EditLogentryActivity extends Activity {
         }
 	}
 	
-	public void saveLogentry(View v) {
-		
+	@Override
+	public void onBackPressed() {
 		int num = Integer.parseInt(((EditText)findViewById(R.id.edit_logentry_num)).getText().toString());
 
 		Spinner siteSpinner = (Spinner)findViewById(R.id.edit_logentry_divesite);
@@ -125,10 +125,6 @@ public class EditLogentryActivity extends Activity {
 		
     	getIntent().putExtra("num", num);
     	setResult(RESULT_OK, getIntent());
-		finish();
-	}
-	
-	public void cancelLogentry(View v) {
 		finish();
 	}
 	
