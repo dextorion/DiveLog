@@ -121,6 +121,7 @@ public class EditLogentryActivity extends Activity {
 			} else {
 				DBUtil.db.saveLogentry(num, date, Integer.parseInt(duration), gasIn.isEmpty() ? 0 : Integer.parseInt(gasIn), gasOut.isEmpty() ? 0 : Integer.parseInt(gasOut), Integer.parseInt(depth), divesite, description);
 			}
+			Toast.makeText(this, "Log saved", Toast.LENGTH_SHORT).show();
 			
 			getIntent().putExtra("num", num);
 			setResult(RESULT_OK, getIntent());

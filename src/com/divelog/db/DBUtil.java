@@ -18,7 +18,7 @@ public class DBUtil extends SQLiteOpenHelper {
 	public static DBUtil db = null;
 	
 	public static final String DATABASE_NAME = "divelog.db";
-	public static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 2;
 
 	public static final String TABLE_LOGENTRIES = "logentries";
 	public static final String QUERY_CREATE_TABLE_LOGENTRIES = "create table " + TABLE_LOGENTRIES + " (id integer primary key autoincrement, num integer, date datetime, duration integer, gas_in integer, gas_out integer, depth integer, divesite integer, description text);";
@@ -54,7 +54,9 @@ public class DBUtil extends SQLiteOpenHelper {
 		if(oldVersion < newVersion) {
 			switch(oldVersion) {
 				case 1:
-					//insert update sql from version 1 here
+					db.execSQL("alter table divesites add column longitude decimal(10,7)");
+					db.execSQL("alter table divesites add column latitude decimal(10,7)");
+					break;
 				
 				default:
 					db.execSQL("drop table if exists " + TABLE_LOGENTRIES);
@@ -65,22 +67,24 @@ public class DBUtil extends SQLiteOpenHelper {
 		}
 	}
 	
-	public Divesite saveDivesite(String name, String description) {
-		return saveDivesite(null, name, description);
+	public Divesite saveDivesite(String name, String description, Double longitude, Double latitude) {
+		return saveDivesite(null, name, description, longitude, latitude);
 	}
 	
-	public Divesite saveDivesite(Integer id, String name, String description) {
+	public Divesite saveDivesite(Integer id, String name, String description, Double longitude, Double latitude) {
 		ContentValues values = new ContentValues();
 		values.put("name", name);
 		values.put("description", description);
+		values.put("longitude", longitude);
+		values.put("latitude", latitude);
 		
 		Divesite divesite = null;
 		if(id != null && id != 0) {
 			getWritableDatabase().update(DBUtil.TABLE_DIVESITES, values, "id = ?", new String[] {id.toString()});
-			divesite = new Divesite(id, name, description);
+			divesite = new Divesite(id, name, description, longitude, latitude);
 		} else {
 			Long newId = getWritableDatabase().insert(DBUtil.TABLE_DIVESITES, null, values);
-			divesite = new Divesite(newId, name, description);
+			divesite = new Divesite(newId, name, description, longitude, latitude);
 		}
 		
 		return divesite;
@@ -89,7 +93,7 @@ public class DBUtil extends SQLiteOpenHelper {
 	public Divesite getDivesite(int id) {
 		Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_DIVESITES, null, "id = " + id, null, null, null, null);
 		cursor.moveToFirst();
-		Divesite divesite = new Divesite(cursor.getLong(0), cursor.getString(1), cursor.getString(2));
+		Divesite divesite = new Divesite(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3), cursor.getDouble(4));
 		
 		return divesite;
 	}
@@ -97,7 +101,7 @@ public class DBUtil extends SQLiteOpenHelper {
 	public Divesite getDivesite(String name) {
 		Cursor cursor = getWritableDatabase().query(DBUtil.TABLE_DIVESITES, null, "name = '" + name + "'", null, null, null, null);
 		cursor.moveToFirst();
-		Divesite divesite = new Divesite(cursor.getLong(0), cursor.getString(1), cursor.getString(2));
+		Divesite divesite = new Divesite(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3), cursor.getDouble(4));
 		
 		return divesite;
 	}
@@ -108,7 +112,7 @@ public class DBUtil extends SQLiteOpenHelper {
 		
 		cursor.moveToFirst();
 		while ( !cursor.isAfterLast()) {
-			divesites.add(new Divesite(cursor.getLong(0), cursor.getString(1), cursor.getString(2)));
+			divesites.add(new Divesite(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getDouble(3), cursor.getDouble(4)));
 			cursor.moveToNext();
 		}
 		

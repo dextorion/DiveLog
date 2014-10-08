@@ -64,7 +64,7 @@ public class LogentryAdapter extends BaseAdapter {
 		}
 		
 		viewHolder.num.setText(String.valueOf(this.logEntryList.get(position).getNum()));
-		viewHolder.date.setText(this.logEntryList.get(position).getDate().format("%G-%m-%d"));
+		viewHolder.date.setText(this.logEntryList.get(position).getDate().format("%Y-%m-%d"));
 		viewHolder.diveSite.setText(this.logEntryList.get(position).getDiveSite().getName());
 		
 		return convertView;
