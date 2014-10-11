@@ -10,15 +10,22 @@ import com.google.android.gms.location.LocationRequest;
 
 import android.app.Activity;
 import android.content.IntentSender;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditDivesiteActivity extends Activity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 	
 	private LocationClient locationClient = null;
 	private LocationRequest locationRequest = null;
+	
+	private double longitude;
+	private double latitude;
+	
+	private float accuracy = 999;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,10 +37,9 @@ public class EditDivesiteActivity extends Activity implements GooglePlayServices
         locationClient = new LocationClient(this, this, this);
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(10000);
-        locationRequest.setFastestInterval(3000);
-        locationRequest.setNumUpdates(6);
-        
+        locationRequest.setInterval(3000);
+        locationRequest.setFastestInterval(1000);
+        locationRequest.setNumUpdates(60);
 	}
 	
 	@Override
@@ -63,26 +69,26 @@ public class EditDivesiteActivity extends Activity implements GooglePlayServices
 	public void onBackPressed() {
 		EditText name = (EditText)findViewById(R.id.edit_divesite_name);
 		EditText description = (EditText)findViewById(R.id.edit_divesite_description);
-		EditText longitude = (EditText)findViewById(R.id.edit_divesite_longitude);
-		EditText latitude = (EditText)findViewById(R.id.edit_divesite_latitude);
 		
 		if(!name.getText().toString().isEmpty()) {
 			Bundle extras = getIntent().getExtras();
-			DBUtil.db.saveDivesite(extras != null ? getIntent().getExtras().getInt("id") : null, name.getText().toString(), description.getText().toString(), Double.parseDouble(longitude.getText().toString()), Double.parseDouble(latitude.getText().toString()));
+			DBUtil.db.saveDivesite(extras != null ? getIntent().getExtras().getInt("id") : null, name.getText().toString(), description.getText().toString(), longitude, latitude);
 			Toast.makeText(this, "Divesite saved", Toast.LENGTH_SHORT).show();
 		}
 		
+		locationClient.removeLocationUpdates(this);
 		locationClient.disconnect();
 		finish();
 	}
 
 	public void onConnected(Bundle arg0) {
 		locationClient.requestLocationUpdates(locationRequest, this);
-		if(locationClient != null) {
-			Location lastLocation = locationClient.getLastLocation();
-			((EditText)findViewById(R.id.edit_divesite_longitude)).setText(String.valueOf(lastLocation.getLongitude()));
-    		((EditText)findViewById(R.id.edit_divesite_latitude)).setText(String.valueOf(lastLocation.getLatitude()));
+		Location lastLocation = locationClient.getLastLocation();
+		
+		if(lastLocation.getAccuracy() < accuracy) {
+			updateLocation(lastLocation);
 		}
+    		
 	}
 
 	public void onDisconnected() {
@@ -104,7 +110,26 @@ public class EditDivesiteActivity extends Activity implements GooglePlayServices
 
 	public void onLocationChanged(Location location) {
 		Location lastLocation = locationClient.getLastLocation();
-		((EditText)findViewById(R.id.edit_divesite_longitude)).setText(String.valueOf(lastLocation.getLongitude()));
-		((EditText)findViewById(R.id.edit_divesite_latitude)).setText(String.valueOf(lastLocation.getLatitude()));
+		
+		if(lastLocation.getAccuracy() < accuracy) {
+			updateLocation(lastLocation);
+		}
+	}
+	
+	private void updateLocation(Location lastLocation) {
+		longitude = lastLocation.getLongitude();
+		latitude = lastLocation.getLatitude();
+		accuracy = lastLocation.getAccuracy();
+		
+		TextView accuracyView = ((TextView)findViewById(R.id.edit_divesite_accuracy));
+		accuracyView.setText("Fetching location... accuracy: " + String.valueOf((int)accuracy) + " meters");
+		if(accuracy < 6 ) {
+			accuracyView.setTextColor(Color.rgb(0, 255, 0));
+			accuracyView.setText("Location");
+		} else if (accuracy < 20){
+			accuracyView.setTextColor(Color.rgb(240, 240, 0));
+		} else {
+			accuracyView.setTextColor(Color.rgb(255, 0, 0));
+		}
 	}
 }

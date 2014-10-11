@@ -24,32 +24,12 @@
         android:layout_marginTop="13dp"/>
 
     <EditText
-        android:id="@+id/edit_divesite_longitude"
-        android:inputType="text"
-        android:layout_width="100sp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/edit_divesite_name_label"
-        android:width="100sp" />
-    
-     <EditText
-        android:id="@+id/edit_divesite_latitude"
-        android:inputType="text"
-        android:layout_width="100sp"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/edit_divesite_longitude"
-        android:layout_toStartOf="@id/edit_divesite_longitude"
-        android:layout_below="@id/edit_divesite_name_label"
-        android:width="100sp" />
-    
-    <EditText
         android:id="@+id/edit_divesite_description"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@id/edit_divesite_longitude"
+        android:layout_below="@id/edit_divesite_name"
         android:gravity="top"
         android:height="80sp"
         android:inputType="textMultiLine|textCapSentences">
@@ -63,6 +43,24 @@
         android:layout_alignBaseline="@id/edit_divesite_description"
         android:layout_alignBottom="@id/edit_divesite_description"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"/> 
     
+    <TextView
+        android:id="@+id/edit_divesite_accuracy"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/edit_divesite_description_label" 
+        android:width="300sp" />
+    
+    <fragment 
+          android:id="@+id/map"
+          android:name="com.google.android.gms.maps.MapFragment"
+          android:layout_width="300sp"
+          android:layout_height="250sp"
+          android:layout_below="@id/edit_divesite_accuracy"
+          android:layout_centerHorizontal="true"
+          />
+
 </RelativeLayout>
