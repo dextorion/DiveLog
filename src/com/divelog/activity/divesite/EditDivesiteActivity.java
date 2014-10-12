@@ -7,6 +7,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.app.Activity;
 import android.content.IntentSender;
@@ -27,12 +32,36 @@ public class EditDivesiteActivity extends Activity implements GooglePlayServices
 	
 	private float accuracy = 999;
 	
+	private int siteId = 0;
+	
+	private GoogleMap map;
+	
+	Divesite divesite = null;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_divesite_layout);
         
         setTitle("Edit divesite");
+        
+        Bundle extras = getIntent().getExtras();
+        if(extras != null && extras.containsKey("id")) {
+        	siteId = extras.getInt("id");
+        }
+        
+        if(siteId > 0) {
+        	divesite = DBUtil.db.getDivesite(siteId);
+        	((EditText)findViewById(R.id.edit_divesite_name)).setText(divesite.getName());
+    		((EditText)findViewById(R.id.edit_divesite_description)).setText(divesite.getDescription());
+        }
+        
+        map = ((MapFragment)getFragmentManager().findFragmentById(R.id.edit_divesite_map)).getMap();
+        map.getUiSettings().setScrollGesturesEnabled(false);
+        map.getUiSettings().setMyLocationButtonEnabled(false);
+        map.getUiSettings().setIndoorLevelPickerEnabled(false);
+        map.getUiSettings().setTiltGesturesEnabled(false);
+        map.setMyLocationEnabled(true);
         
         locationClient = new LocationClient(this, this, this);
         locationRequest = LocationRequest.create();
@@ -45,19 +74,10 @@ public class EditDivesiteActivity extends Activity implements GooglePlayServices
 	@Override
 	protected void onStart() {
         super.onStart();
-        locationClient.connect();
-    }
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		Bundle extras = getIntent().getExtras();
-        if(extras != null && extras.containsKey("id")) {
-        	Divesite divesite = DBUtil.db.getDivesite(extras.getInt("id"));
-        	((EditText)findViewById(R.id.edit_divesite_name)).setText(divesite.getName());
-    		((EditText)findViewById(R.id.edit_divesite_description)).setText(divesite.getDescription());
+        if(siteId == 0 || divesite.getLatitude() == 0 || divesite.getLatitude() == null) {
+        	locationClient.connect();
         }
-	}
+    }
 	
 	@Override
 	public void onStop() { 
@@ -71,9 +91,7 @@ public class EditDivesiteActivity extends Activity implements GooglePlayServices
 		EditText description = (EditText)findViewById(R.id.edit_divesite_description);
 		
 		if(!name.getText().toString().isEmpty()) {
-			Bundle extras = getIntent().getExtras();
-			DBUtil.db.saveDivesite(extras != null ? getIntent().getExtras().getInt("id") : null, name.getText().toString(), description.getText().toString(), longitude, latitude);
-			Toast.makeText(this, "Divesite saved", Toast.LENGTH_SHORT).show();
+			DBUtil.db.saveDivesite(siteId > 0 ? siteId : null, name.getText().toString(), description.getText().toString(), longitude, latitude);
 		}
 		
 		locationClient.removeLocationUpdates(this);
@@ -120,6 +138,9 @@ public class EditDivesiteActivity extends Activity implements GooglePlayServices
 		longitude = lastLocation.getLongitude();
 		latitude = lastLocation.getLatitude();
 		accuracy = lastLocation.getAccuracy();
+		
+		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15);
+        map.animateCamera(cameraUpdate);
 		
 		TextView accuracyView = ((TextView)findViewById(R.id.edit_divesite_accuracy));
 		accuracyView.setText("Fetching location... accuracy: " + String.valueOf((int)accuracy) + " meters");
