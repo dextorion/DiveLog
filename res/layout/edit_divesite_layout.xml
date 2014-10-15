@@ -47,6 +47,7 @@
     
     <TextView
         android:id="@+id/edit_divesite_accuracy"
+        android:text="@string/divesite_accuracy_label"
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -57,10 +58,21 @@
     <fragment 
           android:id="@+id/edit_divesite_map"
           android:name="com.google.android.gms.maps.MapFragment"
-          android:layout_width="300sp"
-          android:layout_height="250sp"
+          android:layout_width="400sp"
+          android:layout_height="200sp"
           android:layout_below="@id/edit_divesite_accuracy"
           android:layout_centerHorizontal="true"
           />
+    
+    <Button 
+        android:id="@+id/edit_divesite_fetch_location"
+        android:text="@string/divesite_fetch_location_label"
+        android:onClick="fetchLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_divesite_map"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
 
 </RelativeLayout>

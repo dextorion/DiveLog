@@ -16,8 +16,8 @@
     
     <string name="divesite_name_label">Name: </string>
     <string name="divesite_description_label">Description: </string>
-    <string name="divesite_save_button_label">Save</string>
-    <string name="divesite_cancel_button_label">Cancel</string>
+    <string name="divesite_accuracy_label">Location</string>
+    <string name="divesite_fetch_location_label">Fetch location</string>
     
     <string name="divesite_edit_entry_title">Edit</string>
     <string name="divesite_delete_entry_title">Delete</string>    
@@ -36,9 +36,6 @@
     <string name="logentry_depth_label">Depth:</string>
     <string name="logentry_depth_hint">meter</string>
     <string name="logentry_description_hint">description...</string>
-    
-    <string name="logentry_save_button_label">Save</string>
-    <string name="logentry_cancel_button_label">Cancel</string>
     
     <string name="logentry_edit_entry_title">Edit</string>
     <string name="logentry_delete_entry_title">Delete</string>
