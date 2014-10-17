@@ -2,6 +2,7 @@ package com.divelog;
 
 import com.divelog.activity.divesite.DivesiteListActivity;
 import com.divelog.activity.logentry.LogentryListActivity;
+import com.divelog.activity.sync.SyncActivity;
 import com.divelog.db.DBUtil;
 
 import android.app.Activity;
@@ -28,8 +29,13 @@ public class MainActivity extends Activity {
 		startActivity(new Intent(this, LogentryListActivity.class));
 	}
 	
-	public void exit(View view) {
+	@Override
+	public void onBackPressed() {
 		DBUtil.db.close();
 		System.exit(0);
+	}
+	
+	public void startSyncActivity(View view) {
+		startActivity(new Intent(this, SyncActivity.class));
 	}
 }

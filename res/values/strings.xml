@@ -4,7 +4,7 @@
     
     <string name="main_sites_button_label">Sites</string>
     <string name="main_log_button_label">Log</string>
-    <string name="main_exit_button_label">Exit</string>
+    <string name="main_sync_button_label">Sync</string>
     
     <string name="logentry_list_add_entry_title">Log Dive</string>
     <string name="logentry_list_settings_title">Dive Settings</string>
@@ -39,6 +39,8 @@
     
     <string name="logentry_edit_entry_title">Edit</string>
     <string name="logentry_delete_entry_title">Delete</string>
+    
+    <string name="sync_sync_title">Sync to Drive</string>
     
 
 </resources>

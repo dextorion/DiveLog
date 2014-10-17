@@ -27,14 +27,14 @@
         android:onClick="startLogentryListActivity"/>
 
 	<Button
-	    android:id="@+id/main_exit"
+	    android:id="@+id/main_sync"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="55dp"
 	    android:layout_marginRight="55dp"
-	    android:layout_marginTop="45dp"
+	    android:layout_marginTop="65dp"
 	    android:gravity="center"
-	    android:text="@string/main_exit_button_label"
-	    android:onClick="exit" />
+	    android:text="@string/main_sync_button_label"
+	    android:onClick="startSyncActivity" />
     
 </LinearLayout>
