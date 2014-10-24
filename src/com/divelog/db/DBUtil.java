@@ -34,7 +34,7 @@ public class DBUtil extends SQLiteOpenHelper {
     public static final int LOGENTRY_DESCRIPTION_COLUMN = 8;
 
 	public static final String TABLE_DIVESITES = "divesites";
-	public static final String QUERY_CREATE_TABLE_DIVESITES = "create table "+ TABLE_DIVESITES + "( id integer primary key autoincrement, name string, description text);";
+	public static final String QUERY_CREATE_TABLE_DIVESITES = "create table "+ TABLE_DIVESITES + "( id integer primary key autoincrement, name string, description text, longitude decimal(10, 7), latitude decimal(10,7));";
 
 	
 	public DBUtil(Context context) {

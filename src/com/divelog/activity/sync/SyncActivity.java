@@ -29,8 +29,7 @@ import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFolder.DriveFileResult;
 import com.google.android.gms.drive.MetadataChangeSet;
 
-public class SyncActivity extends Activity implements ConnectionCallbacks,
-		OnConnectionFailedListener {
+public class SyncActivity extends Activity implements ConnectionCallbacks, OnConnectionFailedListener {
 
 	private static final int RESOLVE_CONNECTION_REQUEST_CODE = 1234;
 
@@ -58,7 +57,7 @@ public class SyncActivity extends Activity implements ConnectionCallbacks,
 					try {
 						// FileInputStream dbFile =
 						// openFileInput("/data/com.divelog/databases/divelog.db");
-						FileInputStream dbFile = new FileInputStream(new File("/data/data/com.divelog/databases/divelog.db"));
+						FileInputStream dbFile = new FileInputStream(new File(getFilesDir().getPath() + "/data/com.divelog/databases/divelog.db"));
 						String content = "";
 
 						if (dbFile != null) {
@@ -75,8 +74,7 @@ public class SyncActivity extends Activity implements ConnectionCallbacks,
 							content = stringBuilder.toString();
 						}
 
-						OutputStream outputStream = driveContents
-								.getOutputStream();
+						OutputStream outputStream = driveContents.getOutputStream();
 						Writer writer = new OutputStreamWriter(outputStream);
 						try {
 							writer.write(content);
@@ -115,10 +113,7 @@ public class SyncActivity extends Activity implements ConnectionCallbacks,
 		setContentView(R.layout.sync_layout);
 		setTitle("Sync");
 
-		driveApi = new GoogleApiClient.Builder(this).addApi(Drive.API)
-				.addScope(Drive.SCOPE_FILE).addScope(Drive.SCOPE_APPFOLDER)
-				.addConnectionCallbacks(this)
-				.addOnConnectionFailedListener(this).build();
+		driveApi = new GoogleApiClient.Builder(this).addApi(Drive.API).addScope(Drive.SCOPE_FILE).addScope(Drive.SCOPE_APPFOLDER).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
 
 		new DBUtil(this);
 	}
@@ -136,8 +131,7 @@ public class SyncActivity extends Activity implements ConnectionCallbacks,
 	}
 
 	public void syncToDrive(View view) {
-		Drive.DriveApi.newDriveContents(driveApi).setResultCallback(
-				driveContentsCallback);
+		Drive.DriveApi.newDriveContents(driveApi).setResultCallback(driveContentsCallback);
 	}
 
 	public void onConnected(Bundle connectionHint) {
@@ -150,8 +144,7 @@ public class SyncActivity extends Activity implements ConnectionCallbacks,
 	}
 
 	@Override
-	protected void onActivityResult(final int requestCode,
-			final int resultCode, final Intent data) {
+	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		switch (requestCode) {
 		case RESOLVE_CONNECTION_REQUEST_CODE:
 			if (!driveApi.isConnecting() && !driveApi.isConnected()) {
@@ -164,14 +157,12 @@ public class SyncActivity extends Activity implements ConnectionCallbacks,
 	public void onConnectionFailed(ConnectionResult connectionResult) {
 		if (connectionResult.hasResolution()) {
 			try {
-				connectionResult.startResolutionForResult(this,
-						RESOLVE_CONNECTION_REQUEST_CODE);
+				connectionResult.startResolutionForResult(this, RESOLVE_CONNECTION_REQUEST_CODE);
 			} catch (IntentSender.SendIntentException e) {
 				// Unable to resolve, message user appropriately
 			}
 		} else {
-			GooglePlayServicesUtil.getErrorDialog(
-					connectionResult.getErrorCode(), this, 0).show();
+			GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), this, 0).show();
 		}
 	}
 }
