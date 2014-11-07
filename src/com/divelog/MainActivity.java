@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
         setTitle("Dive Log");
         
         new DBUtil(this);
+
 	}
 	
 	public void startDivesiteListActivity(View view) {
